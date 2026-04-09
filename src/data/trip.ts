@@ -1,0 +1,478 @@
+export const TRIP_START = new Date('2026-05-19T00:00:00+09:00');
+export const TRIP_END = new Date('2026-06-04T23:59:59+09:00');
+
+export const MEMBERS = [
+  { name: 'Mathieu', emoji: '🐵', color: '#e63946' },
+  { name: 'Alexis', emoji: '🦊', color: '#457b9d' },
+  { name: 'Luca', emoji: '🐺', color: '#7fb069' },
+  { name: 'Dylan', emoji: '🐻', color: '#d4a574' },
+  { name: 'Guillaume', emoji: '🦁', color: '#9b59b6' },
+] as const;
+
+export type DayPlan = {
+  day: number;
+  date: string;
+  weekday: string;
+  location: string;
+  description: string;
+  emoji: string;
+  lat: number;
+  lon: number;
+};
+
+export const ITINERARY: DayPlan[] = [
+  {
+    day: 1,
+    date: '19/05',
+    weekday: 'Mardi',
+    location: 'Shinjuku',
+    description: 'Arrivee a Haneda Airport. Installation a Shinjuku. Decouverte de Shibuya & Shinjuku le soir.',
+    emoji: '✈️',
+    lat: 35.6937632,
+    lon: 139.7036319,
+  },
+  {
+    day: 2,
+    date: '20/05',
+    weekday: 'Mercredi',
+    location: 'Shibuya',
+    description:
+      'Centre commercial Miyashita Park, Shibuya Crossing, Don Quijote, Pokemon Center, Nintendo magasin.',
+    emoji: '🛍️',
+    lat: 35.6633709,
+    lon: 139.6964952,
+  },
+  {
+    day: 3,
+    date: '21/05',
+    weekday: 'Jeudi',
+    location: 'Asakusa',
+    description: 'Nakamise avenue pietonne, Senso-ji temple - le plus vieux temple de Tokyo.',
+    emoji: '⛩️',
+    lat: 35.7175966,
+    lon: 139.7975626,
+  },
+  {
+    day: 4,
+    date: '22/05',
+    weekday: 'Vendredi',
+    location: 'Ueno',
+    description: 'Quartier Ueno : parcs, musees, Starbuck, street food, magasins de jouets.',
+    emoji: '🏛️',
+    lat: 35.7125805,
+    lon: 139.7800712,
+  },
+  {
+    day: 5,
+    date: '23/05',
+    weekday: 'Samedi',
+    location: 'Tsukiji',
+    description: 'Marches exterieurs, meilleurs restos, Ichiba Dori (restos de dingue), coutellerie et sabres.',
+    emoji: '🍣',
+    lat: 35.6650914,
+    lon: 139.7708281,
+  },
+  {
+    day: 6,
+    date: '24/05',
+    weekday: 'Dimanche',
+    location: 'Harajuku',
+    description:
+      'Rockeurs, ceremonies stylees le dimanche, Meiji Jingu parc et temple. Attention aux arnaques !',
+    emoji: '🎸',
+    lat: 35.6702145,
+    lon: 139.7024266,
+  },
+  {
+    day: 7,
+    date: '25/05',
+    weekday: 'Lundi',
+    location: 'Akihabara',
+    description: 'Mandarake, Poplife, Yodobashi, sanctuaire Kanda Myojin (trop cool).',
+    emoji: '🎮',
+    lat: 35.7125805,
+    lon: 139.7800712,
+  },
+  {
+    day: 8,
+    date: '26/05',
+    weekday: 'Mardi',
+    location: 'Odaiba',
+    description: 'Ile artificielle : Gundam grandeur nature, Sega, Taco Bell, Rainbow Bridge.',
+    emoji: '🤖',
+    lat: 35.6275347,
+    lon: 139.7714719,
+  },
+  {
+    day: 9,
+    date: '27/05',
+    weekday: 'Mercredi',
+    location: 'Musee Ghibli',
+    description: 'Musee Ghibli a Mitaka. Programme flexible selon les envies.',
+    emoji: '🌿',
+    lat: 35.6961731,
+    lon: 139.5706324,
+  },
+  {
+    day: 10,
+    date: '28/05',
+    weekday: 'Jeudi',
+    location: 'Kamakura',
+    description: 'Petit village pittoresque, train avec vue mer. Reservations a prevoir.',
+    emoji: '🏖️',
+    lat: 35.3192808,
+    lon: 139.5469627,
+  },
+  {
+    day: 11,
+    date: '29/05',
+    weekday: 'Vendredi',
+    location: 'Mt. Nokogiri',
+    description: 'Rando montagne, 1h30 de train, ambiance chill, grand Bouddha.',
+    emoji: '⛰️',
+    lat: 35.1589926,
+    lon: 139.8300810,
+  },
+  {
+    day: 12,
+    date: '30/05',
+    weekday: 'Samedi',
+    location: 'Shimokitazawa',
+    description: 'Friperies underground, quartier alternatif et boheme.',
+    emoji: '👕',
+    lat: 35.6616779,
+    lon: 139.6663345,
+  },
+  {
+    day: 13,
+    date: '31/05',
+    weekday: 'Dimanche',
+    location: 'A decider',
+    description: 'Journee libre ! On decide sur place selon les envies du groupe.',
+    emoji: '🎲',
+    lat: 35.6937632,
+    lon: 139.7036319,
+  },
+  {
+    day: 14,
+    date: '01/06',
+    weekday: 'Lundi',
+    location: 'A decider',
+    description: 'Journee libre ! Explorations spontanees.',
+    emoji: '🗺️',
+    lat: 35.6937632,
+    lon: 139.7036319,
+  },
+  {
+    day: 15,
+    date: '02/06',
+    weekday: 'Mardi',
+    location: 'Tokyo',
+    description: 'Derniers achats et restos. Profiter a fond !',
+    emoji: '🛒',
+    lat: 35.6768601,
+    lon: 139.7638947,
+  },
+  {
+    day: 16,
+    date: '03/06',
+    weekday: 'Mercredi',
+    location: 'Tokyo',
+    description: 'Derniers achats et restos. Savourer les derniers moments.',
+    emoji: '🍜',
+    lat: 35.6768601,
+    lon: 139.7638947,
+  },
+  {
+    day: 17,
+    date: '04/06',
+    weekday: 'Jeudi',
+    location: 'Haneda Airport',
+    description: 'Derniers restos et achats, puis retour depuis Haneda Airport.',
+    emoji: '🛫',
+    lat: 35.5438875,
+    lon: 139.7686524,
+  },
+];
+
+export const CHECKLIST_CATEGORIES = [
+  {
+    name: 'Documents',
+    emoji: '📄',
+    items: [
+      'Passeport (validite > 6 mois)',
+      'Billets d\'avion imprimes',
+      'Reservations hotels',
+      'Assurance voyage',
+      'Copies numeriques de tous les docs',
+      'Visit Japan Web (QR code)',
+      'Japan Rail Pass (si prevu)',
+    ],
+  },
+  {
+    name: 'Argent',
+    emoji: '💴',
+    items: [
+      'Carte bancaire internationale',
+      'Yens en cash (prevoir ~50 000¥)',
+      'Carte Suica/Pasmo (rechargeable)',
+      'Appli de change installee',
+    ],
+  },
+  {
+    name: 'Tech',
+    emoji: '📱',
+    items: [
+      'Telephone + chargeur',
+      'Batterie externe',
+      'Adaptateur prise japonaise (Type A)',
+      'eSIM / Pocket WiFi',
+      'Ecouteurs',
+      'Appareil photo + carte SD',
+      'Cable USB-C',
+    ],
+  },
+  {
+    name: 'Vetements',
+    emoji: '👕',
+    items: [
+      'T-shirts (x7)',
+      'Pantalons / shorts (x4)',
+      'Sous-vetements (x8)',
+      'Chaussettes (x8)',
+      'Veste legere / coupe-vent',
+      'Sweat / hoodie',
+      'Chaussures confortables pour marcher',
+      'Tongs / sandales',
+      'Maillot de bain',
+    ],
+  },
+  {
+    name: 'Hygiene',
+    emoji: '🧴',
+    items: [
+      'Brosse a dents + dentifrice',
+      'Deodorant',
+      'Creme solaire',
+      'Shampoing / gel douche (format voyage)',
+      'Serviette microfibre',
+      'Mouchoirs / kleenex',
+      'Medicaments personnels',
+      'Doliprane / Ibuprofen',
+    ],
+  },
+  {
+    name: 'Pratique',
+    emoji: '🎒',
+    items: [
+      'Sac a dos journee',
+      'Valise / sac principal',
+      'Cadenas valise',
+      'Sacs plastiques (linge sale)',
+      'Gourde reutilisable',
+      'Parapluie compact (saison des pluies !)',
+      'Masques (transports en commun)',
+      'Eventail / ventilo portable',
+    ],
+  },
+];
+
+export const ADVENT_ITEMS = [
+  {
+    day: 1,
+    title: 'Le saviez-vous ?',
+    content:
+      'Au Japon, il est impoli de manger en marchant dans la rue. Trouvez un coin tranquille pour deguster vos snacks !',
+    emoji: '🍡',
+  },
+  {
+    day: 2,
+    title: 'Mot du jour',
+    content: 'Konnichiwa (こんにちは) = Bonjour ! La base pour commencer toute conversation.',
+    emoji: '🗣️',
+  },
+  {
+    day: 3,
+    title: 'Astuce transport',
+    content:
+      'Telechargez l\'appli "Navitime" ou "Google Maps" en avance. Le metro de Tokyo a 13 lignes et 285 stations !',
+    emoji: '🚇',
+  },
+  {
+    day: 4,
+    title: 'Fun fact',
+    content: 'Il y a plus de 5,5 millions de distributeurs automatiques au Japon. On en trouve litteralement partout !',
+    emoji: '🥤',
+  },
+  {
+    day: 5,
+    title: 'Mot du jour',
+    content: 'Sumimasen (すみません) = Excusez-moi / Pardon. Vous l\'utiliserez 100 fois par jour.',
+    emoji: '🙇',
+  },
+  {
+    day: 6,
+    title: 'Regle d\'or',
+    content:
+      'Enlevez TOUJOURS vos chaussures en entrant chez quelqu\'un ou dans un temple. Des chaussons sont souvent fournis.',
+    emoji: '👟',
+  },
+  {
+    day: 7,
+    title: 'Food tip',
+    content:
+      'Les konbini (7-Eleven, Lawson, FamilyMart) ont de la nourriture incroyable. Essayez les onigiri et les sandwichs !',
+    emoji: '🍙',
+  },
+  {
+    day: 8,
+    title: 'Culture',
+    content:
+      'Ne donnez JAMAIS de pourboire au Japon. C\'est considere comme impoli. Le service est toujours inclus.',
+    emoji: '💴',
+  },
+  {
+    day: 9,
+    title: 'Mot du jour',
+    content: 'Arigatou gozaimasu (ありがとうございます) = Merci beaucoup. Version courte : Arigatou !',
+    emoji: '🙏',
+  },
+  {
+    day: 10,
+    title: 'Defi du jour',
+    content: 'Apprenez a utiliser des baguettes si ce n\'est pas deja fait ! Entrainement avant le depart.',
+    emoji: '🥢',
+  },
+  {
+    day: 11,
+    title: 'Astuce photo',
+    content:
+      'Le signe V (peace) sur les photos est ultra courant au Japon. Adoptez-le pour vos selfies de groupe !',
+    emoji: '✌️',
+  },
+  {
+    day: 12,
+    title: 'Fun fact',
+    content:
+      'Les toilettes japonaises sont les plus avancees du monde. Boutons chauffants, jets d\'eau, musique... Explorez !',
+    emoji: '🚽',
+  },
+  {
+    day: 13,
+    title: 'Food tip',
+    content:
+      'Le ramen se mange en faisant du bruit ! Slurper ses nouilles est un signe d\'appreciation au Japon.',
+    emoji: '🍜',
+  },
+  {
+    day: 14,
+    title: 'Mot du jour',
+    content: 'Oishii (おいしい) = Delicieux ! A utiliser dans chaque restaurant.',
+    emoji: '😋',
+  },
+  {
+    day: 15,
+    title: 'Astuce shopping',
+    content:
+      'Les magasins Don Quijote (Donki) sont des cavernes d\'Ali Baba ouvertes 24h. Parfait pour les souvenirs.',
+    emoji: '🏪',
+  },
+  {
+    day: 16,
+    title: 'Culture',
+    content: 'Dans le metro, mettez votre telephone en silencieux. On ne parle pas au telephone dans les transports.',
+    emoji: '🤫',
+  },
+  {
+    day: 17,
+    title: 'Playlist',
+    content:
+      'Creez votre playlist Japan vibes ! Nujabes, YOASOBI, Fujii Kaze, Joe Hisaishi... Ambiance garantie.',
+    emoji: '🎵',
+  },
+  {
+    day: 18,
+    title: 'Mot du jour',
+    content: 'Ikura desu ka? (いくらですか？) = Combien ca coute ? Indispensable pour le shopping.',
+    emoji: '🛒',
+  },
+  {
+    day: 19,
+    title: 'Fun fact',
+    content:
+      'Shinjuku Station est la gare la plus frequentee du monde : 3,6 millions de passagers par jour !',
+    emoji: '🚉',
+  },
+  {
+    day: 20,
+    title: 'Sante',
+    content:
+      'Fin mai au Japon = chaud et humide. Buvez beaucoup d\'eau et prevoyez de la creme solaire.',
+    emoji: '☀️',
+  },
+  {
+    day: 21,
+    title: 'Defi du jour',
+    content:
+      'Essayez de manger dans un restaurant avec un ticket machine (食券機). C\'est une experience unique !',
+    emoji: '🎫',
+  },
+  {
+    day: 22,
+    title: 'Mot du jour',
+    content: 'Kawaii (かわいい) = Mignon. Vous l\'entendrez et le direz des centaines de fois.',
+    emoji: '🧸',
+  },
+  {
+    day: 23,
+    title: 'Astuce',
+    content: 'Les combinis ont des ATM qui acceptent les cartes etrangeres. 7-Eleven est le plus fiable.',
+    emoji: '🏧',
+  },
+  {
+    day: 24,
+    title: 'Culture',
+    content:
+      'Les Japonais font la queue pour tout, meme les escalators (a gauche a Tokyo). Respectez l\'ordre !',
+    emoji: '🚶',
+  },
+  {
+    day: 25,
+    title: 'Countdown !',
+    content:
+      'Plus que quelques jours ! Verifiez que tout est pret : passeport, valise, applis, yens, sourire.',
+    emoji: '🎉',
+  },
+  {
+    day: 26,
+    title: 'Mot du jour',
+    content: 'Kanpai (乾杯) = Sante ! Pour trinquer entre potes au Japon. Indispensable pour le premier soir.',
+    emoji: '🍻',
+  },
+  {
+    day: 27,
+    title: 'Fun fact',
+    content: 'Au Japon, on peut acheter presque tout dans un distributeur : parapluies, cravates, fleurs...',
+    emoji: '🎁',
+  },
+  {
+    day: 28,
+    title: 'Checklist finale',
+    content:
+      'Dernier check : Visit Japan Web rempli ? eSIM activee ? Adaptateur dans la valise ? C\'est parti !',
+    emoji: '✅',
+  },
+  {
+    day: 29,
+    title: 'Le grand jour approche',
+    content: 'Demain c\'est le jour J ! Reposez-vous bien, le jetlag va etre reel mais ca vaut le coup.',
+    emoji: '😴',
+  },
+  {
+    day: 30,
+    title: 'BON VOYAGE !',
+    content:
+      'C\'est le jour J ! Monkey Japan 2026, c\'est parti ! いってきます (Ittekimasu = On y va !)',
+    emoji: '🇯🇵',
+  },
+];
