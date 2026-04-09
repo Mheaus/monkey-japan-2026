@@ -1,0 +1,41 @@
+{
+  "name": "monkey-japan-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "format": "oxfmt --check .",
+    "format:fix": "oxfmt .",
+    "lint": "oxlint .",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@heroui/react": "^2.8.7",
+    "@iconify/react": "^6.0.2",
+    "@react-aria/i18n": "^3.12.14",
+    "@react-router/node": "^7.11.0",
+    "@react-router/serve": "^7.11.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.9.0",
+    "isbot": "^5.1.32",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router": "^7.11.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^7.11.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^24.10.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "oxfmt": "^0.20.0",
+    "oxlint": "^1.35.0",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.8.3",
+    "vite": "^7.3.0",
+    "vite-tsconfig-paths": "^6.0.3"
+  }
+}

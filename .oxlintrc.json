@@ -1,0 +1,6 @@
+{
+  "plugins": ["oxc", "eslint", "import", "typescript", "react"],
+  "rules": {
+    "no-nested-ternary": "error"
+  }
+}
