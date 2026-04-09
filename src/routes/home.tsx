@@ -39,16 +39,16 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
   );
 }
 
-function FloatingPetal({ delay, x }: { delay: number; x: number }) {
+function FloatingPetal({ delay, pct }: { delay: number; pct: number }) {
   return (
     <motion.div
-      className="absolute text-sakura text-2xl pointer-events-none select-none"
-      initial={{ y: -20, x, opacity: 0, rotate: 0 }}
+      className="absolute text-2xl pointer-events-none select-none"
+      style={{ left: `${pct}%` }}
+      initial={{ y: -20, opacity: 0, rotate: 0 }}
       animate={{
         y: '100vh',
-        opacity: [0, 1, 1, 0],
+        opacity: [0, 0.8, 0.8, 0],
         rotate: 360,
-        x: x + Math.sin(delay) * 100,
       }}
       transition={{
         duration: 8 + delay,
@@ -92,19 +92,17 @@ const quickLinks = [
 export default function Home() {
   const countdown = useCountdown(TRIP_START);
 
-  const petals = React.useMemo(() => {
-    return Array.from({ length: 12 }, (_, i) => ({
-      delay: i * 1.5,
-      x: (i / 12) * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-    }));
-  }, []);
+  const petals = Array.from({ length: 12 }, (_, i) => ({
+    delay: i * 1.5,
+    pct: (i / 12) * 100,
+  }));
 
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Floating sakura petals */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {petals.map((p, i) => (
-          <FloatingPetal key={i} delay={p.delay} x={p.x} />
+          <FloatingPetal key={i} delay={p.delay} pct={p.pct} />
         ))}
       </div>
 
