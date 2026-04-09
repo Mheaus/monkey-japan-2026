@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@heroui/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@heroui/react';
+import { motion } from 'framer-motion';
 
 import { ADVENT_ITEMS, TRIP_START } from '~/data/trip';
 
@@ -52,8 +52,6 @@ function useUnlockedDays() {
 
   const syncUnlocked = React.useCallback(
     (timeBased: number) => {
-      // Keep the max between time-based and previously saved count
-      // This ensures days unlocked in the past stay unlocked even if the date logic would say otherwise
       const newCount = Math.max(timeBased, unlockedCount);
       if (newCount !== unlockedCount) {
         setUnlockedCount(newCount);
@@ -80,14 +78,14 @@ function useUnlockedDays() {
 }
 
 export default function Calendrier() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedDay, setSelectedDay] = React.useState<(typeof ADVENT_ITEMS)[number] | null>(null);
   const daysSinceStart = getDaysSinceAdventStart();
   const daysUntilTrip = getDaysUntilTrip();
   const { openedDays, syncUnlocked, markOpened } = useUnlockedDays();
 
-  // Sync time-based unlock count with localStorage (keeps highest value)
-  const effectiveUnlocked = syncUnlocked(daysSinceStart + 1);
+  const isDev = import.meta.env.DEV;
+  const effectiveUnlocked = isDev ? ADVENT_ITEMS.length : syncUnlocked(daysSinceStart + 1);
 
   const adventStart = getAdventStartDate();
   const hasStarted = daysSinceStart >= 0;
@@ -139,7 +137,7 @@ export default function Calendrier() {
         )}
       </motion.div>
 
-      {/* Grid - like stickers on a page */}
+      {/* Grid */}
       <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-3 sm:gap-4">
         {ADVENT_ITEMS.map((item, index) => {
           const isUnlocked = index < effectiveUnlocked;
@@ -193,27 +191,32 @@ export default function Calendrier() {
         })}
       </div>
 
-      {/* Modal - notebook page reveal */}
-      <Modal isOpen={isOpen} onClose={onClose} size="lg" backdrop="blur">
+      {/* Modal */}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center" backdrop="blur" size="lg">
         <ModalContent className="paper-card !bg-paper">
-          <AnimatePresence>
-            {selectedDay ? (
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                <ModalHeader className="flex flex-col gap-1 pb-2">
-                  <div className="flex items-center gap-3">
+          {(onClose) => (
+            <>
+              {selectedDay ? (
+                <>
+                  <ModalHeader className="flex flex-row items-center gap-3 pb-2">
                     <span className="text-4xl">{selectedDay.emoji}</span>
                     <div>
                       <span className="stamp text-[10px] !p-[1px_6px] !border-2">Jour {selectedDay.day}</span>
                       <h3 className="text-2xl font-handwritten font-bold text-ink mt-1">{selectedDay.title}</h3>
                     </div>
-                  </div>
-                </ModalHeader>
-                <ModalBody className="pb-6 notebook-lines">
-                  <p className="text-ink/80 leading-relaxed text-base">{selectedDay.content}</p>
-                </ModalBody>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+                  </ModalHeader>
+                  <ModalBody className="notebook-lines">
+                    <p className="text-ink/80 leading-relaxed text-base">{selectedDay.content}</p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose} size="sm">
+                      Fermer
+                    </Button>
+                  </ModalFooter>
+                </>
+              ) : null}
+            </>
+          )}
         </ModalContent>
       </Modal>
     </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useNavigate, useHref, NavLink } from 'react-router';
-import { HeroUIProvider } from '@heroui/react';
+import { HeroUIProvider, ToastProvider } from '@heroui/react';
 import { I18nProvider } from '@react-aria/i18n';
 import { Icon } from '@iconify/react';
 
@@ -81,8 +81,13 @@ export default function App() {
   const navigate = useNavigate();
 
   return (
-    <HeroUIProvider navigate={(path) => navigate(path, { viewTransition: true })} useHref={useHref}>
+    <HeroUIProvider
+      navigate={(path) => navigate(path, { viewTransition: true })}
+      useHref={useHref}
+      className="min-h-screen"
+    >
       <I18nProvider locale="fr-FR">
+        <ToastProvider placement="bottom-right" maxVisibleToasts={3} />
         <Navbar />
         <main className="pt-16">
           <Outlet />
