@@ -1,0 +1,9 @@
+node_modules
+.react-router
+build
+dist
+.git
+.cache
+.DS_Store
+.env
+.env.local
