@@ -103,12 +103,8 @@ export default function Calendrier() {
     <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-        <h1 className="text-5xl sm:text-6xl font-handwritten font-bold text-ink mb-1">
-          Calendrier de l'avant
-        </h1>
-        <p className="font-handwritten text-xl text-ink/50 mb-2">
-          Un nouveau contenu chaque jour avant le depart !
-        </p>
+        <h1 className="text-5xl sm:text-6xl font-handwritten font-bold text-ink mb-1">Calendrier de l'avant</h1>
+        <p className="font-handwritten text-xl text-ink/50 mb-2">Un nouveau contenu chaque jour avant le depart !</p>
         {!hasStarted ? (
           <div className="inline-block paper-card rounded-lg px-4 py-2 mt-2">
             <p className="text-sm text-ink/60">
@@ -125,11 +121,9 @@ export default function Calendrier() {
             </p>
             <div className="paper-card rounded-lg px-4 py-2">
               <p className="text-sm text-ink/60">
-                <span className="font-handwritten font-bold text-ink">{openedCount}</span> / {totalItems} ouverts
-                {' '}&middot;{' '}
-                <span className="font-handwritten font-bold text-ink">
-                  {Math.min(effectiveUnlocked, totalItems)}
-                </span>{' '}
+                <span className="font-handwritten font-bold text-ink">{openedCount}</span> / {totalItems} ouverts{' '}
+                &middot;{' '}
+                <span className="font-handwritten font-bold text-ink">{Math.min(effectiveUnlocked, totalItems)}</span>{' '}
                 debloques
               </p>
             </div>
@@ -143,7 +137,7 @@ export default function Calendrier() {
           const isUnlocked = index < effectiveUnlocked;
           const isToday = daysSinceStart === index;
           const isOpened = openedDays.has(item.day);
-          const rotation = ((index * 7 + 3) % 7 - 3) * 0.8;
+          const rotation = (((index * 7 + 3) % 7) - 3) * 0.8;
 
           return (
             <motion.div
@@ -159,13 +153,15 @@ export default function Calendrier() {
                 onClick={() => {
                   if (isUnlocked) handleOpen(item);
                 }}
-                className={`aspect-square w-full rounded-lg p-2 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer relative ${
-                  isToday
-                    ? 'paper-card ring-2 ring-stamp-red shadow-lg animate-pulse'
-                    : isUnlocked
-                      ? 'paper-card hover:shadow-md hover:-translate-y-1'
-                      : 'bg-kraft/30 border border-kraft/50 cursor-not-allowed opacity-50'
-                }`}
+                className={`aspect-square w-full rounded-lg p-2 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer relative ${(() => {
+                  if (isToday) {
+                    return 'paper-card ring-2 ring-stamp-red shadow-lg animate-pulse';
+                  } else if (isUnlocked) {
+                    return 'paper-card hover:shadow-md hover:-translate-y-1';
+                  } else {
+                    return 'bg-kraft/30 border border-kraft/50 cursor-not-allowed opacity-50';
+                  }
+                })()}`}
               >
                 {isUnlocked ? (
                   <>
@@ -173,9 +169,7 @@ export default function Calendrier() {
                     <span className="text-[9px] sm:text-xs font-handwritten font-semibold text-ink/60 text-center leading-tight">
                       {item.title}
                     </span>
-                    {isOpened ? (
-                      <span className="absolute top-1 right-1 text-matcha text-xs">&#10003;</span>
-                    ) : null}
+                    {isOpened ? <span className="absolute top-1 right-1 text-matcha text-xs">&#10003;</span> : null}
                   </>
                 ) : (
                   <>
@@ -193,7 +187,7 @@ export default function Calendrier() {
 
       {/* Modal */}
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center" backdrop="blur" size="lg">
-        <ModalContent className="paper-card !bg-paper">
+        <ModalContent className="paper-card !bg-paper p-8">
           {(onClose) => (
             <>
               {selectedDay ? (
