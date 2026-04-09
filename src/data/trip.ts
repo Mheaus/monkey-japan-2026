@@ -475,4 +475,52 @@ export const ADVENT_ITEMS = [
       'C\'est le jour J ! Monkey Japan 2026, c\'est parti ! いってきます (Ittekimasu = On y va !)',
     emoji: '🇯🇵',
   },
+  {
+    day: 31,
+    title: 'Mot du jour',
+    content: 'Gomen nasai (ごめんなさい) = Je suis desole. Utile si vous bousculez quelqu\'un dans le metro bonde !',
+    emoji: '😅',
+  },
+  {
+    day: 32,
+    title: 'Fun fact',
+    content:
+      'Le Japon a plus de 6 800 iles ! Tokyo est sur Honshu, la plus grande. Vous marcherez sur un archipel volcanique.',
+    emoji: '🌋',
+  },
+  {
+    day: 33,
+    title: 'Food tip',
+    content:
+      'Testez un izakaya (居酒屋) : c\'est un bar a tapas japonais. On commande plein de petits plats a partager entre potes.',
+    emoji: '🍶',
+  },
+  {
+    day: 34,
+    title: 'Astuce pratique',
+    content:
+      'Les konbini impriment, envoient des colis, et ont meme du WiFi gratuit. C\'est un couteau suisse japonais.',
+    emoji: '🔧',
+  },
+  {
+    day: 35,
+    title: 'Culture',
+    content:
+      'Au Japon on offre et recoit les choses a deux mains. Cartes de visite, argent, cadeaux... c\'est un signe de respect.',
+    emoji: '🤲',
+  },
+  {
+    day: 36,
+    title: 'Mot du jour',
+    content:
+      'Sugoi (すごい) = Incroyable / Trop bien ! L\'equivalent de "wow". Vous allez le dire toutes les 5 minutes.',
+    emoji: '🤩',
+  },
+  {
+    day: 37,
+    title: 'Defi du groupe',
+    content:
+      'Photo de groupe obligatoire devant le Shibuya Crossing le premier soir. Monkey Japan 2026, on immortalise ca !',
+    emoji: '📸',
+  },
 ];

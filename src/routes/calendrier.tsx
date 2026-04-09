@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { ADVENT_ITEMS, TRIP_START } from '~/data/trip';
 
+const STORAGE_KEY = 'monkey-japan-advent';
+
 function getDaysUntilTrip(): number {
   const now = new Date();
   const diff = TRIP_START.getTime() - now.getTime();
@@ -23,16 +25,78 @@ function getDaysSinceAdventStart(): number {
   return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
+function useUnlockedDays() {
+  const [unlockedCount, setUnlockedCount] = React.useState(0);
+  const [openedDays, setOpenedDays] = React.useState<Set<number>>(new Set());
+
+  React.useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const data = JSON.parse(saved) as { unlockedCount: number; openedDays: number[] };
+        setUnlockedCount(data.unlockedCount ?? 0);
+        setOpenedDays(new Set(data.openedDays ?? []));
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const save = React.useCallback((count: number, opened: Set<number>) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlockedCount: count, openedDays: [...opened] }));
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const syncUnlocked = React.useCallback(
+    (timeBased: number) => {
+      // Keep the max between time-based and previously saved count
+      // This ensures days unlocked in the past stay unlocked even if the date logic would say otherwise
+      const newCount = Math.max(timeBased, unlockedCount);
+      if (newCount !== unlockedCount) {
+        setUnlockedCount(newCount);
+        save(newCount, openedDays);
+      }
+      return newCount;
+    },
+    [unlockedCount, openedDays, save],
+  );
+
+  const markOpened = React.useCallback(
+    (day: number) => {
+      setOpenedDays((prev) => {
+        const next = new Set(prev);
+        next.add(day);
+        save(unlockedCount, next);
+        return next;
+      });
+    },
+    [unlockedCount, save],
+  );
+
+  return { unlockedCount, openedDays, syncUnlocked, markOpened };
+}
+
 export default function Calendrier() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedDay, setSelectedDay] = React.useState<(typeof ADVENT_ITEMS)[number] | null>(null);
   const daysSinceStart = getDaysSinceAdventStart();
   const daysUntilTrip = getDaysUntilTrip();
+  const { openedDays, syncUnlocked, markOpened } = useUnlockedDays();
+
+  // Sync time-based unlock count with localStorage (keeps highest value)
+  const effectiveUnlocked = syncUnlocked(daysSinceStart + 1);
 
   const adventStart = getAdventStartDate();
   const hasStarted = daysSinceStart >= 0;
 
+  const openedCount = openedDays.size;
+  const totalItems = ADVENT_ITEMS.length;
+
   const handleOpen = (item: (typeof ADVENT_ITEMS)[number]) => {
+    markOpened(item.day);
     setSelectedDay(item);
     onOpen();
   };
@@ -57,17 +121,30 @@ export default function Calendrier() {
             </p>
           </div>
         ) : (
-          <p className="font-handwritten text-lg text-matcha font-bold">
-            {daysUntilTrip > 0 ? `Plus que ${daysUntilTrip} jours !` : "C'est le moment !"}
-          </p>
+          <div className="flex flex-col items-center gap-2">
+            <p className="font-handwritten text-lg text-matcha font-bold">
+              {daysUntilTrip > 0 ? `Plus que ${daysUntilTrip} jours !` : "C'est le moment !"}
+            </p>
+            <div className="paper-card rounded-lg px-4 py-2">
+              <p className="text-sm text-ink/60">
+                <span className="font-handwritten font-bold text-ink">{openedCount}</span> / {totalItems} ouverts
+                {' '}&middot;{' '}
+                <span className="font-handwritten font-bold text-ink">
+                  {Math.min(effectiveUnlocked, totalItems)}
+                </span>{' '}
+                debloques
+              </p>
+            </div>
+          </div>
         )}
       </motion.div>
 
       {/* Grid - like stickers on a page */}
       <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-3 sm:gap-4">
         {ADVENT_ITEMS.map((item, index) => {
-          const isUnlocked = daysSinceStart > index;
+          const isUnlocked = index < effectiveUnlocked;
           const isToday = daysSinceStart === index;
+          const isOpened = openedDays.has(item.day);
           const rotation = ((index * 7 + 3) % 7 - 3) * 0.8;
 
           return (
@@ -80,11 +157,11 @@ export default function Calendrier() {
             >
               <button
                 type="button"
-                disabled={!isUnlocked && !isToday}
+                disabled={!isUnlocked}
                 onClick={() => {
-                  if (isUnlocked || isToday) handleOpen(item);
+                  if (isUnlocked) handleOpen(item);
                 }}
-                className={`aspect-square w-full rounded-lg p-2 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                className={`aspect-square w-full rounded-lg p-2 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer relative ${
                   isToday
                     ? 'paper-card ring-2 ring-stamp-red shadow-lg animate-pulse'
                     : isUnlocked
@@ -92,17 +169,22 @@ export default function Calendrier() {
                       : 'bg-kraft/30 border border-kraft/50 cursor-not-allowed opacity-50'
                 }`}
               >
-                {isUnlocked || isToday ? (
+                {isUnlocked ? (
                   <>
                     <span className="text-2xl sm:text-3xl">{item.emoji}</span>
                     <span className="text-[9px] sm:text-xs font-handwritten font-semibold text-ink/60 text-center leading-tight">
                       {item.title}
                     </span>
+                    {isOpened ? (
+                      <span className="absolute top-1 right-1 text-matcha text-xs">&#10003;</span>
+                    ) : null}
                   </>
                 ) : (
                   <>
                     <span className="text-2xl sm:text-3xl">🔒</span>
-                    <span className="text-xs font-handwritten font-bold text-ink/30">J-{ADVENT_ITEMS.length - index}</span>
+                    <span className="text-xs font-handwritten font-bold text-ink/30">
+                      J-{ADVENT_ITEMS.length - index}
+                    </span>
                   </>
                 )}
               </button>
