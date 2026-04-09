@@ -42,9 +42,7 @@ export default function Checklist() {
     <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-        <h1 className="text-5xl sm:text-6xl font-handwritten font-bold text-ink mb-1">
-          Checklist valise
-        </h1>
+        <h1 className="text-5xl sm:text-6xl font-handwritten font-bold text-ink mb-1">Checklist valise</h1>
         <p className="font-handwritten text-xl text-ink/50 mb-6">Ne rien oublier pour le Japon !</p>
 
         {/* Progress - notebook style */}
@@ -79,7 +77,7 @@ export default function Checklist() {
             >
               <div
                 className={`paper-card rounded-lg overflow-hidden h-full ${allDone ? 'ring-2 ring-matcha/30' : ''}`}
-                style={{ transform: `rotate(${(catIndex % 3 - 1) * 0.5}deg)` }}
+                style={{ transform: `rotate(${((catIndex % 3) - 1) * 0.5}deg)` }}
               >
                 {/* Header with washi tape effect */}
                 <div className="bg-washi/30 px-5 py-3 border-b border-kraft/50">
@@ -104,7 +102,7 @@ export default function Checklist() {
                           onValueChange={() => toggle(key)}
                           size="sm"
                           color="success"
-                          className="w-full"
+                          className="w-full mr-4"
                           classNames={{
                             label: `text-sm ${isChecked ? 'line-through text-ink/30' : 'text-ink/70'}`,
                           }}
