@@ -36,8 +36,7 @@ export const ITINERARY: DayPlan[] = [
     date: '20/05',
     weekday: 'Mercredi',
     location: 'Shibuya',
-    description:
-      'Centre commercial Miyashita Park, Shibuya Crossing, Don Quijote, Pokemon Center, Nintendo magasin.',
+    description: 'Centre commercial Miyashita Park, Shibuya Crossing, Don Quijote, Pokemon Center, Nintendo magasin.',
     emoji: '🛍️',
     lat: 35.6633709,
     lon: 139.6964952,
@@ -77,8 +76,7 @@ export const ITINERARY: DayPlan[] = [
     date: '24/05',
     weekday: 'Dimanche',
     location: 'Harajuku',
-    description:
-      'Rockeurs, ceremonies stylees le dimanche, Meiji Jingu parc et temple. Attention aux arnaques !',
+    description: 'Rockeurs, ceremonies stylees le dimanche, Meiji Jingu parc et temple. Attention aux arnaques !',
     emoji: '🎸',
     lat: 35.6702145,
     lon: 139.7024266,
@@ -131,7 +129,7 @@ export const ITINERARY: DayPlan[] = [
     description: 'Rando montagne, 1h30 de train, ambiance chill, grand Bouddha.',
     emoji: '⛰️',
     lat: 35.1589926,
-    lon: 139.8300810,
+    lon: 139.830081,
   },
   {
     day: 12,
@@ -201,7 +199,7 @@ export const CHECKLIST_CATEGORIES = [
     emoji: '📄',
     items: [
       'Passeport (validite > 6 mois)',
-      'Billets d\'avion imprimes',
+      "Billets d'avion imprimes",
       'Reservations hotels',
       'Assurance voyage',
       'Copies numeriques de tous les docs',
@@ -307,14 +305,14 @@ export const ADVENT_ITEMS = [
   {
     day: 5,
     title: 'Mot du jour',
-    content: 'Sumimasen (すみません) = Excusez-moi / Pardon. Vous l\'utiliserez 100 fois par jour.',
+    content: "Sumimasen (すみません) = Excusez-moi / Pardon. Vous l'utiliserez 100 fois par jour.",
     emoji: '🙇',
   },
   {
     day: 6,
-    title: 'Regle d\'or',
+    title: "Regle d'or",
     content:
-      'Enlevez TOUJOURS vos chaussures en entrant chez quelqu\'un ou dans un temple. Des chaussons sont souvent fournis.',
+      "Enlevez TOUJOURS vos chaussures en entrant chez quelqu'un ou dans un temple. Des chaussons sont souvent fournis.",
     emoji: '👟',
   },
   {
@@ -327,8 +325,7 @@ export const ADVENT_ITEMS = [
   {
     day: 8,
     title: 'Culture',
-    content:
-      'Ne donnez JAMAIS de pourboire au Japon. C\'est considere comme impoli. Le service est toujours inclus.',
+    content: "Ne donnez JAMAIS de pourboire au Japon. C'est considere comme impoli. Le service est toujours inclus.",
     emoji: '💴',
   },
   {
@@ -340,28 +337,26 @@ export const ADVENT_ITEMS = [
   {
     day: 10,
     title: 'Defi du jour',
-    content: 'Apprenez a utiliser des baguettes si ce n\'est pas deja fait ! Entrainement avant le depart.',
+    content: "Apprenez a utiliser des baguettes si ce n'est pas deja fait ! Entrainement avant le depart.",
     emoji: '🥢',
   },
   {
     day: 11,
     title: 'Astuce photo',
-    content:
-      'Le signe V (peace) sur les photos est ultra courant au Japon. Adoptez-le pour vos selfies de groupe !',
+    content: 'Le signe V (peace) sur les photos est ultra courant au Japon. Adoptez-le pour vos selfies de groupe !',
     emoji: '✌️',
   },
   {
     day: 12,
     title: 'Fun fact',
     content:
-      'Les toilettes japonaises sont les plus avancees du monde. Boutons chauffants, jets d\'eau, musique... Explorez !',
+      "Les toilettes japonaises sont les plus avancees du monde. Boutons chauffants, jets d'eau, musique... Explorez !",
     emoji: '🚽',
   },
   {
     day: 13,
     title: 'Food tip',
-    content:
-      'Le ramen se mange en faisant du bruit ! Slurper ses nouilles est un signe d\'appreciation au Japon.',
+    content: "Le ramen se mange en faisant du bruit ! Slurper ses nouilles est un signe d'appreciation au Japon.",
     emoji: '🍜',
   },
   {
@@ -373,8 +368,7 @@ export const ADVENT_ITEMS = [
   {
     day: 15,
     title: 'Astuce shopping',
-    content:
-      'Les magasins Don Quijote (Donki) sont des cavernes d\'Ali Baba ouvertes 24h. Parfait pour les souvenirs.',
+    content: "Les magasins Don Quijote (Donki) sont des cavernes d'Ali Baba ouvertes 24h. Parfait pour les souvenirs.",
     emoji: '🏪',
   },
   {
@@ -386,8 +380,7 @@ export const ADVENT_ITEMS = [
   {
     day: 17,
     title: 'Playlist',
-    content:
-      'Creez votre playlist Japan vibes ! Nujabes, YOASOBI, Fujii Kaze, Joe Hisaishi... Ambiance garantie.',
+    content: 'Creez votre playlist Japan vibes ! Nujabes, YOASOBI, Fujii Kaze, Joe Hisaishi... Ambiance garantie.',
     emoji: '🎵',
   },
   {
@@ -399,28 +392,25 @@ export const ADVENT_ITEMS = [
   {
     day: 19,
     title: 'Fun fact',
-    content:
-      'Shinjuku Station est la gare la plus frequentee du monde : 3,6 millions de passagers par jour !',
+    content: 'Shinjuku Station est la gare la plus frequentee du monde : 3,6 millions de passagers par jour !',
     emoji: '🚉',
   },
   {
     day: 20,
     title: 'Sante',
-    content:
-      'Fin mai au Japon = chaud et humide. Buvez beaucoup d\'eau et prevoyez de la creme solaire.',
+    content: "Fin mai au Japon = chaud et humide. Buvez beaucoup d'eau et prevoyez de la creme solaire.",
     emoji: '☀️',
   },
   {
     day: 21,
     title: 'Defi du jour',
-    content:
-      'Essayez de manger dans un restaurant avec un ticket machine (食券機). C\'est une experience unique !',
+    content: "Essayez de manger dans un restaurant avec un ticket machine (食券機). C'est une experience unique !",
     emoji: '🎫',
   },
   {
     day: 22,
     title: 'Mot du jour',
-    content: 'Kawaii (かわいい) = Mignon. Vous l\'entendrez et le direz des centaines de fois.',
+    content: "Kawaii (かわいい) = Mignon. Vous l'entendrez et le direz des centaines de fois.",
     emoji: '🧸',
   },
   {
@@ -432,15 +422,13 @@ export const ADVENT_ITEMS = [
   {
     day: 24,
     title: 'Culture',
-    content:
-      'Les Japonais font la queue pour tout, meme les escalators (a gauche a Tokyo). Respectez l\'ordre !',
+    content: "Les Japonais font la queue pour tout, meme les escalators (a gauche a Tokyo). Respectez l'ordre !",
     emoji: '🚶',
   },
   {
     day: 25,
     title: 'Countdown !',
-    content:
-      'Plus que quelques jours ! Verifiez que tout est pret : passeport, valise, applis, yens, sourire.',
+    content: 'Plus que quelques jours ! Verifiez que tout est pret : passeport, valise, applis, yens, sourire.',
     emoji: '🎉',
   },
   {
@@ -458,69 +446,19 @@ export const ADVENT_ITEMS = [
   {
     day: 28,
     title: 'Checklist finale',
-    content:
-      'Dernier check : Visit Japan Web rempli ? eSIM activee ? Adaptateur dans la valise ? C\'est parti !',
+    content: "Dernier check : Visit Japan Web rempli ? eSIM activee ? Adaptateur dans la valise ? C'est parti !",
     emoji: '✅',
   },
   {
     day: 29,
     title: 'Le grand jour approche',
-    content: 'Demain c\'est le jour J ! Reposez-vous bien, le jetlag va etre reel mais ca vaut le coup.',
+    content: "Demain c'est le jour J ! Reposez-vous bien, le jetlag va etre reel mais ca vaut le coup.",
     emoji: '😴',
   },
   {
     day: 30,
     title: 'BON VOYAGE !',
-    content:
-      'C\'est le jour J ! Monkey Japan 2026, c\'est parti ! いってきます (Ittekimasu = On y va !)',
+    content: "C'est le jour J ! Monkey Japan 2026, c'est parti ! いってきます (Ittekimasu = On y va !)",
     emoji: '🇯🇵',
-  },
-  {
-    day: 31,
-    title: 'Mot du jour',
-    content: 'Gomen nasai (ごめんなさい) = Je suis desole. Utile si vous bousculez quelqu\'un dans le metro bonde !',
-    emoji: '😅',
-  },
-  {
-    day: 32,
-    title: 'Fun fact',
-    content:
-      'Le Japon a plus de 6 800 iles ! Tokyo est sur Honshu, la plus grande. Vous marcherez sur un archipel volcanique.',
-    emoji: '🌋',
-  },
-  {
-    day: 33,
-    title: 'Food tip',
-    content:
-      'Testez un izakaya (居酒屋) : c\'est un bar a tapas japonais. On commande plein de petits plats a partager entre potes.',
-    emoji: '🍶',
-  },
-  {
-    day: 34,
-    title: 'Astuce pratique',
-    content:
-      'Les konbini impriment, envoient des colis, et ont meme du WiFi gratuit. C\'est un couteau suisse japonais.',
-    emoji: '🔧',
-  },
-  {
-    day: 35,
-    title: 'Culture',
-    content:
-      'Au Japon on offre et recoit les choses a deux mains. Cartes de visite, argent, cadeaux... c\'est un signe de respect.',
-    emoji: '🤲',
-  },
-  {
-    day: 36,
-    title: 'Mot du jour',
-    content:
-      'Sugoi (すごい) = Incroyable / Trop bien ! L\'equivalent de "wow". Vous allez le dire toutes les 5 minutes.',
-    emoji: '🤩',
-  },
-  {
-    day: 37,
-    title: 'Defi du groupe',
-    content:
-      'Photo de groupe obligatoire devant le Shibuya Crossing le premier soir. Monkey Japan 2026, on immortalise ca !',
-    emoji: '📸',
   },
 ];
