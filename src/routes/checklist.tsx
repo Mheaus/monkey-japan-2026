@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardBody, CardHeader, Progress, Checkbox } from '@heroui/react';
+import { Checkbox, Progress } from '@heroui/react';
 import { motion } from 'framer-motion';
 
 import { CHECKLIST_CATEGORIES } from '~/data/trip';
@@ -42,37 +42,33 @@ export default function Checklist() {
     <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-        <h1 className="text-4xl sm:text-5xl font-black text-gray-800 mb-2">
-          <span className="text-matcha">Checklist</span> valise
+        <h1 className="text-5xl sm:text-6xl font-handwritten font-bold text-ink mb-1">
+          Checklist valise
         </h1>
-        <p className="text-gray-500 text-lg mb-6">Ne rien oublier pour le Japon !</p>
+        <p className="font-handwritten text-xl text-ink/50 mb-6">Ne rien oublier pour le Japon !</p>
 
-        {/* Progress bar */}
-        <Card className="bg-white/90 border border-matcha/20">
-          <CardBody className="p-5">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium text-gray-600">Progression</span>
-              <span className="text-sm font-bold text-matcha">
-                {checkedCount} / {totalItems}
-              </span>
-            </div>
-            <Progress
-              value={progress}
-              color="success"
-              className="mb-2"
-              size="lg"
-            />
-            {progress === 100 ? (
-              <p className="text-matcha font-bold text-center mt-2">Tout est pret ! Bon voyage ! 🎉</p>
-            ) : null}
-          </CardBody>
-        </Card>
+        {/* Progress - notebook style */}
+        <div className="paper-card rounded-lg p-5 max-w-md mx-auto">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm font-handwritten text-ink/60">Progression</span>
+            <span className="font-handwritten text-lg font-bold text-matcha">
+              {checkedCount} / {totalItems}
+            </span>
+          </div>
+          <Progress value={progress} color="success" size="lg" />
+          {progress === 100 ? (
+            <p className="font-handwritten text-xl text-matcha font-bold text-center mt-3">
+              Tout est pret ! Bon voyage ! 🎉
+            </p>
+          ) : null}
+        </div>
       </motion.div>
 
-      {/* Categories */}
+      {/* Categories - like torn notebook pages */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {CHECKLIST_CATEGORIES.map((category, catIndex) => {
           const catChecked = category.items.filter((item) => checked[`${category.name}-${item}`]).length;
+          const allDone = catChecked === category.items.length;
 
           return (
             <motion.div
@@ -81,18 +77,23 @@ export default function Checklist() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: catIndex * 0.08 }}
             >
-              <Card className="bg-white/90 border border-gray-100 hover:border-sakura/20 transition-all h-full">
-                <CardHeader className="pb-1 pt-4 px-5">
+              <div
+                className={`paper-card rounded-lg overflow-hidden h-full ${allDone ? 'ring-2 ring-matcha/30' : ''}`}
+                style={{ transform: `rotate(${(catIndex % 3 - 1) * 0.5}deg)` }}
+              >
+                {/* Header with washi tape effect */}
+                <div className="bg-washi/30 px-5 py-3 border-b border-kraft/50">
                   <div className="flex items-center gap-3 w-full">
                     <span className="text-2xl">{category.emoji}</span>
-                    <h3 className="text-lg font-bold text-gray-800 flex-1">{category.name}</h3>
-                    <span className="text-xs font-medium text-gray-400">
+                    <h3 className="text-xl font-handwritten font-bold text-ink flex-1">{category.name}</h3>
+                    <span className="font-handwritten text-sm text-ink/40">
                       {catChecked}/{category.items.length}
                     </span>
+                    {allDone ? <span className="text-matcha">✓</span> : null}
                   </div>
-                </CardHeader>
-                <CardBody className="px-5 pb-4 pt-2">
-                  <div className="space-y-1">
+                </div>
+                <div className="px-5 pb-4 pt-3 notebook-lines">
+                  <div className="space-y-0.5">
                     {category.items.map((item) => {
                       const key = `${category.name}-${item}`;
                       const isChecked = !!checked[key];
@@ -105,7 +106,7 @@ export default function Checklist() {
                           color="success"
                           className="w-full"
                           classNames={{
-                            label: `text-sm ${isChecked ? 'line-through text-gray-400' : 'text-gray-700'}`,
+                            label: `text-sm ${isChecked ? 'line-through text-ink/30' : 'text-ink/70'}`,
                           }}
                         >
                           {item}
@@ -113,8 +114,8 @@ export default function Checklist() {
                       );
                     })}
                   </div>
-                </CardBody>
-              </Card>
+                </div>
+              </div>
             </motion.div>
           );
         })}

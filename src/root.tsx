@@ -14,7 +14,7 @@ export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap',
   },
 ];
 
@@ -46,12 +46,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-sakura/30 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-paper/90 backdrop-blur-md border-b border-kraft shadow-sm">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <NavLink to="/" className="flex items-center gap-2 text-xl font-bold text-gray-800">
+        <NavLink to="/" className="flex items-center gap-2">
           <span className="text-2xl">&#127481;&#127477;</span>
-          <span className="hidden sm:inline">Monkey Japan</span>
-          <span className="text-xs font-normal text-sakura-dark bg-sakura-light px-2 py-0.5 rounded-full">2026</span>
+          <span className="hidden sm:inline font-handwritten text-2xl font-bold text-ink">Monkey Japan</span>
+          <span className="stamp text-[10px] !p-[2px_8px]">2026</span>
         </NavLink>
         <div className="flex items-center gap-1">
           {navItems.map((item) => (
@@ -59,10 +59,10 @@ function Navbar() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
+                `flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-sakura-light text-sakura-dark'
-                    : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+                    ? 'bg-washi/60 text-ink border border-kraft'
+                    : 'text-ink/50 hover:text-ink hover:bg-washi/30'
                 }`
               }
             >
