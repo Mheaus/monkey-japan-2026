@@ -30,12 +30,21 @@ function useUnlockedDays() {
   const [openedDays, setOpenedDays] = React.useState<Set<number>>(new Set());
 
   React.useEffect(() => {
+    const timeBased = getDaysSinceAdventStart() + 1;
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const data = JSON.parse(saved) as { unlockedCount: number; openedDays: number[] };
-        setUnlockedCount(data.unlockedCount ?? 0);
-        setOpenedDays(new Set(data.openedDays ?? []));
+        const savedCount = data.unlockedCount ?? 0;
+        const savedDays = new Set<number>(data.openedDays ?? []);
+        const newCount = Math.max(timeBased, savedCount);
+        setUnlockedCount(newCount);
+        setOpenedDays(savedDays);
+        if (newCount !== savedCount) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlockedCount: newCount, openedDays: [...savedDays] }));
+        }
+      } else {
+        setUnlockedCount(timeBased);
       }
     } catch {
       // ignore
@@ -50,18 +59,6 @@ function useUnlockedDays() {
     }
   }, []);
 
-  const syncUnlocked = React.useCallback(
-    (timeBased: number) => {
-      const newCount = Math.max(timeBased, unlockedCount);
-      if (newCount !== unlockedCount) {
-        setUnlockedCount(newCount);
-        save(newCount, openedDays);
-      }
-      return newCount;
-    },
-    [unlockedCount, openedDays, save],
-  );
-
   const markOpened = React.useCallback(
     (day: number) => {
       setOpenedDays((prev) => {
@@ -74,7 +71,7 @@ function useUnlockedDays() {
     [unlockedCount, save],
   );
 
-  return { unlockedCount, openedDays, syncUnlocked, markOpened };
+  return { unlockedCount, openedDays, markOpened };
 }
 
 export default function Calendrier() {
@@ -82,10 +79,10 @@ export default function Calendrier() {
   const [selectedDay, setSelectedDay] = React.useState<(typeof ADVENT_ITEMS)[number] | null>(null);
   const daysSinceStart = getDaysSinceAdventStart();
   const daysUntilTrip = getDaysUntilTrip();
-  const { openedDays, syncUnlocked, markOpened } = useUnlockedDays();
+  const { openedDays, unlockedCount, markOpened } = useUnlockedDays();
 
   const isDev = import.meta.env.DEV;
-  const effectiveUnlocked = isDev ? ADVENT_ITEMS.length : syncUnlocked(daysSinceStart + 1);
+  const effectiveUnlocked = isDev ? ADVENT_ITEMS.length : Math.max(daysSinceStart + 1, unlockedCount);
 
   const adventStart = getAdventStartDate();
   const hasStarted = daysSinceStart >= 0;
