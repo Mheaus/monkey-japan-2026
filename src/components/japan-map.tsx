@@ -9,44 +9,45 @@ import type { DayPlan } from '~/data/trip';
 // ~30 points d'intérêt emblématiques du Japon
 const POIS = [
   // ── TOKYO ──────────────────────────────────────────────────────────
-  { id: 'tokyo-tower',    name: 'Tokyo Tower',        emoji: '🗼', lat: 35.6586, lon: 139.7454 },
-  { id: 'skytree',        name: 'Tokyo Skytree',       emoji: '📡', lat: 35.7101, lon: 139.8107 },
-  { id: 'meiji',          name: 'Meiji Jingu',          emoji: '⛩️', lat: 35.6763, lon: 139.6993 },
-  { id: 'shibuya-cross',  name: 'Shibuya Crossing',    emoji: '🚦', lat: 35.6595, lon: 139.7005 },
-  { id: 'akihabara',      name: 'Akihabara',            emoji: '🎮', lat: 35.7022, lon: 139.7741 },
-  { id: 'odaiba',         name: 'Odaiba Gundam',        emoji: '🤖', lat: 35.6275, lon: 139.7715 },
-  { id: 'ghibli',         name: 'Musée Ghibli',         emoji: '🌿', lat: 35.6962, lon: 139.5706 },
-  { id: 'ueno',           name: 'Ueno Park',            emoji: '🌸', lat: 35.7126, lon: 139.7742 },
-  { id: 'asakusa',        name: 'Senso-ji',             emoji: '⛩️', lat: 35.7148, lon: 139.7967 },
-  { id: 'shinjuku',       name: 'Shinjuku',             emoji: '🏙️', lat: 35.6938, lon: 139.7036 },
-  { id: 'harajuku',       name: 'Harajuku',             emoji: '🎸', lat: 35.6702, lon: 139.7024 },
-  { id: 'tsukiji',        name: 'Tsukiji',              emoji: '🍣', lat: 35.6651, lon: 139.7708 },
-  { id: 'shimokita',      name: 'Shimokitazawa',        emoji: '👕', lat: 35.6617, lon: 139.6663 },
-  { id: 'pokemon-center', name: 'Pokémon Center',       emoji: '⚡', lat: 35.6591, lon: 139.7020 },
+  { id: 'tokyo-tower', name: 'Tokyo Tower', emoji: '🗼', lat: 35.6586, lon: 139.7454 },
+  { id: 'skytree', name: 'Tokyo Skytree', emoji: '📡', lat: 35.7101, lon: 139.8107 },
+  { id: 'meiji', name: 'Meiji Jingu', emoji: '⛩️', lat: 35.6763, lon: 139.6993 },
+  { id: 'shibuya-cross', name: 'Shibuya Crossing', emoji: '🚦', lat: 35.6595, lon: 139.7005 },
+  { id: 'akihabara', name: 'Akihabara', emoji: '🎮', lat: 35.7022, lon: 139.7741 },
+  { id: 'odaiba', name: 'Odaiba Gundam', emoji: '🤖', lat: 35.6275, lon: 139.7715 },
+  { id: 'ghibli', name: 'Musée Ghibli', emoji: '🌿', lat: 35.6962, lon: 139.5706 },
+  { id: 'ueno', name: 'Ueno Park', emoji: '🌸', lat: 35.7126, lon: 139.7742 },
+  { id: 'asakusa', name: 'Senso-ji', emoji: '⛩️', lat: 35.7148, lon: 139.7967 },
+  { id: 'shinjuku', name: 'Shinjuku', emoji: '🏙️', lat: 35.6938, lon: 139.7036 },
+  { id: 'harajuku', name: 'Harajuku', emoji: '🎸', lat: 35.6702, lon: 139.7024 },
+  { id: 'tsukiji', name: 'Tsukiji', emoji: '🍣', lat: 35.6651, lon: 139.7708 },
+  { id: 'shimokita', name: 'Shimokitazawa', emoji: '👕', lat: 35.6617, lon: 139.6663 },
+  { id: 'pokemon-center', name: 'Pokémon Center', emoji: '⚡', lat: 35.6591, lon: 139.702 },
   // ── OSAKA ──────────────────────────────────────────────────────────
-  { id: 'osaka-castle',   name: "Château d'Osaka",      emoji: '🏯', lat: 34.6873, lon: 135.5262 },
-  { id: 'dotonbori',      name: 'Dotonbori',            emoji: '🦞', lat: 34.6687, lon: 135.5013 },
-  { id: 'shinsekai',      name: 'Shinsekai',            emoji: '🗽', lat: 34.6514, lon: 135.5063 },
-  { id: 'namba',          name: 'Namba',                emoji: '🛍️', lat: 34.6686, lon: 135.4984 },
-  { id: 'umeda',          name: 'Umeda Sky Building',   emoji: '🌆', lat: 34.7059, lon: 135.4941 },
-  { id: 'universal',      name: 'Universal Studios',    emoji: '🎡', lat: 34.6654, lon: 135.4323 },
+  { id: 'osaka-castle', name: "Château d'Osaka", emoji: '🏯', lat: 34.6873, lon: 135.5262 },
+  { id: 'dotonbori', name: 'Dotonbori', emoji: '🦞', lat: 34.6687, lon: 135.5013 },
+  { id: 'shinsekai', name: 'Shinsekai', emoji: '🗽', lat: 34.6514, lon: 135.5063 },
+  { id: 'namba', name: 'Namba', emoji: '🛍️', lat: 34.6686, lon: 135.4984 },
+  { id: 'umeda', name: 'Umeda Sky Building', emoji: '🌆', lat: 34.7059, lon: 135.4941 },
+  { id: 'universal', name: 'Universal Studios', emoji: '🎡', lat: 34.6654, lon: 135.4323 },
   // ── KYOTO ──────────────────────────────────────────────────────────
-  { id: 'kinkaku',        name: 'Temple d\'Or',         emoji: '✨', lat: 35.0394, lon: 135.7292 },
-  { id: 'fushimi',        name: 'Fushimi Inari',        emoji: '🏮', lat: 34.9671, lon: 135.7727 },
-  { id: 'arashiyama',     name: 'Forêt de bambous',     emoji: '🎋', lat: 35.0094, lon: 135.6722 },
-  { id: 'gion',           name: 'Gion',                 emoji: '👘', lat: 35.0037, lon: 135.7785 },
-  { id: 'kiyomizu',       name: 'Kiyomizudera',         emoji: '⛩️', lat: 34.9948, lon: 135.7851 },
-  { id: 'nijo',           name: 'Château Nijo',         emoji: '🏯', lat: 35.0142, lon: 135.7482 },
-  { id: 'philosopher',    name: 'Chemin du Philosophe', emoji: '🌸', lat: 35.0272, lon: 135.7938 },
+  { id: 'kinkaku', name: "Temple d'Or", emoji: '✨', lat: 35.0394, lon: 135.7292 },
+  { id: 'fushimi', name: 'Fushimi Inari', emoji: '🏮', lat: 34.9671, lon: 135.7727 },
+  { id: 'arashiyama', name: 'Forêt de bambous', emoji: '🎋', lat: 35.0094, lon: 135.6722 },
+  { id: 'gion', name: 'Gion', emoji: '👘', lat: 35.0037, lon: 135.7785 },
+  { id: 'kiyomizu', name: 'Kiyomizudera', emoji: '⛩️', lat: 34.9948, lon: 135.7851 },
+  { id: 'nijo', name: 'Château Nijo', emoji: '🏯', lat: 35.0142, lon: 135.7482 },
+  { id: 'philosopher', name: 'Chemin du Philosophe', emoji: '🌸', lat: 35.0272, lon: 135.7938 },
   // ── QUELQUES INCONTOURNABLES NATIONAL ──────────────────────────────
-  { id: 'fuji',           name: 'Mont Fuji',            emoji: '🗻', lat: 35.3607, lon: 138.7274 },
-  { id: 'nara',           name: 'Cerfs de Nara',        emoji: '🦌', lat: 34.6851, lon: 135.8049 },
-  { id: 'hiroshima',      name: 'Hiroshima',            emoji: '☮️', lat: 34.3853, lon: 132.4553 },
-  { id: 'sapporo',        name: 'Sapporo',              emoji: '🍺', lat: 43.0618, lon: 141.3545 },
+  { id: 'fuji', name: 'Mont Fuji', emoji: '🗻', lat: 35.3607, lon: 138.7274 },
+  { id: 'nara', name: 'Cerfs de Nara', emoji: '🦌', lat: 34.6851, lon: 135.8049 },
+  { id: 'hiroshima', name: 'Hiroshima', emoji: '☮️', lat: 34.3853, lon: 132.4553 },
+  { id: 'sapporo', name: 'Sapporo', emoji: '🍺', lat: 43.0618, lon: 141.3545 },
 ] as const;
 
 // Base : appartement à Wakaba, Shinjuku
-const HOME = { lat: 35.6876, lon: 139.7230 };
+const HOME = { lat: 35.6876, lon: 139.723 };
+const VILLA = { lat: 34.7963, lon: 138.9986 };
 
 // Override des couleurs par layer — mer bleu nuit, terre verte, axes rouge foncé
 function applyCustomColors(map: MaplibreMap) {
@@ -62,41 +63,54 @@ function applyCustomColors(map: MaplibreMap) {
       else if (
         layer.type === 'fill' &&
         (id.includes('water') || id === 'sea') &&
-        !id.includes('label') && !id.includes('name')
+        !id.includes('label') &&
+        !id.includes('name')
       ) {
-        map.setPaintProperty(layer.id, 'fill-color', '#2a60c8');
+        map.setPaintProperty(layer.id, 'fill-color', '#a0d8ec');
       } else if (layer.type === 'line' && id.startsWith('water')) {
-        map.setPaintProperty(layer.id, 'line-color', '#2a60c8');
+        map.setPaintProperty(layer.id, 'line-color', '#a0d8ec');
       }
       // Végétation / parcs / forêts — vert un poil plus soutenu mais soft
       else if (
         layer.type === 'fill' &&
-        (id.includes('park') || id.includes('forest') || id.includes('wood') ||
-         id.includes('grass') || id.includes('meadow') || id.includes('scrub') ||
-         id.includes('garden') || id.includes('vegetation') || id.includes('landcover'))
+        (id.includes('park') ||
+          id.includes('forest') ||
+          id.includes('wood') ||
+          id.includes('grass') ||
+          id.includes('meadow') ||
+          id.includes('scrub') ||
+          id.includes('garden') ||
+          id.includes('vegetation') ||
+          id.includes('landcover'))
       ) {
         map.setPaintProperty(layer.id, 'fill-color', '#b8d99a');
       }
       // Bâtiments — beige neutre
       else if (layer.type === 'fill' && id.includes('building')) {
         map.setPaintProperty(layer.id, 'fill-color', '#c8bfa8');
-        try { map.setPaintProperty(layer.id, 'fill-outline-color', '#b8af98'); } catch { /* skip */ }
+        try {
+          map.setPaintProperty(layer.id, 'fill-outline-color', '#b8af98');
+        } catch {
+          /* skip */
+        }
       }
       // Seulement autoroutes + nationales en ocre/rouille, les secondaires cachées
-      else if (
-        layer.type === 'line' &&
-        (id.includes('motorway') || id.includes('trunk'))
-      ) {
+      else if (layer.type === 'line' && (id.includes('motorway') || id.includes('trunk'))) {
         map.setPaintProperty(layer.id, 'line-color', '#b8621a');
       } else if (layer.type === 'line' && id.includes('primary')) {
         map.setPaintProperty(layer.id, 'line-color', '#c8860a');
       } else if (
         layer.type === 'line' &&
-        (id.includes('secondary') || id.includes('tertiary') ||
-         id.includes('residential') || id.includes('service') ||
-         id.includes('unclassified') || id.includes('path') ||
-         id.includes('track') || id.includes('footway') ||
-         id.includes('cycleway') || id.includes('link'))
+        (id.includes('secondary') ||
+          id.includes('tertiary') ||
+          id.includes('residential') ||
+          id.includes('service') ||
+          id.includes('unclassified') ||
+          id.includes('path') ||
+          id.includes('track') ||
+          id.includes('footway') ||
+          id.includes('cycleway') ||
+          id.includes('link'))
       ) {
         // masquer toutes les petites voiries
         map.setLayoutProperty(layer.id, 'visibility', 'none');
@@ -118,7 +132,9 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
   const [hoveredPoi, setHoveredPoi] = React.useState<string | null>(null);
   const [hoveredDay, setHoveredDay] = React.useState<number | null>(null);
   const [zoom, setZoom] = React.useState(5);
-  const [bounds, setBounds] = React.useState<{ minLon: number; maxLon: number; minLat: number; maxLat: number } | null>(null);
+  const [bounds, setBounds] = React.useState<{ minLon: number; maxLon: number; minLat: number; maxLat: number } | null>(
+    null,
+  );
 
   const activeData = days.find((d) => d.day === activeDay) ?? null;
 
@@ -151,17 +167,13 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
       if (p.lon < bounds.minLon || p.lon > bounds.maxLon) return false;
       if (p.lat < bounds.minLat || p.lat > bounds.maxLat) return false;
       // Exclure si un pin est trop proche
-      const tooClose = days.some(
-        (d) => Math.abs(d.lat - p.lat) < THRESHOLD && Math.abs(d.lon - p.lon) < THRESHOLD,
-      );
+      const tooClose = days.some((d) => Math.abs(d.lat - p.lat) < THRESHOLD && Math.abs(d.lon - p.lon) < THRESHOLD);
       return !tooClose;
     });
   }, [zoom, bounds, days]);
 
   return (
-    <div
-      className="relative w-full h-full rounded-xl overflow-hidden border border-kraft shadow-md"
-    >
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-kraft shadow-md">
       <Map
         ref={mapRef}
         initialViewState={{ longitude: 139.68, latitude: 35.52, zoom: 10 }}
@@ -177,7 +189,10 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
           const minLat = Math.min(...lats);
           const maxLat = Math.max(...lats);
           e.target.fitBounds(
-            [[minLon, minLat], [maxLon, maxLat]],
+            [
+              [minLon, minLat],
+              [maxLon, maxLat],
+            ],
             { padding: 60, duration: 0 },
           );
           updateViewport();
@@ -186,8 +201,8 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
       >
         <NavigationControl position="top-right" />
 
-        {/* Marqueur maison — très visible */}
-        <Marker longitude={HOME.lon} latitude={HOME.lat} anchor="bottom">
+        {/* Marqueur maison — très visible, toujours devant */}
+        <Marker longitude={HOME.lon} latitude={HOME.lat} anchor="bottom" style={{ zIndex: 50 }}>
           <div style={{ filter: 'drop-shadow(0 3px 8px rgba(255,200,0,0.7)) drop-shadow(0 1px 3px rgba(0,0,0,0.5))' }}>
             <div
               style={{
@@ -208,14 +223,51 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
             >
               🏠 Base
             </div>
-            <div style={{
-              width: 0,
-              height: 0,
-              borderLeft: '6px solid transparent',
-              borderRight: '6px solid transparent',
-              borderTop: '8px solid #e6a800',
-              margin: '-1px auto 0',
-            }} />
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderLeft: '6px solid transparent',
+                borderRight: '6px solid transparent',
+                borderTop: '8px solid #e6a800',
+                margin: '-1px auto 0',
+              }}
+            />
+          </div>
+        </Marker>
+
+        {/* Marqueur villa de rêve — Kawazu, Izu */}
+        <Marker longitude={VILLA.lon} latitude={VILLA.lat} anchor="bottom" style={{ zIndex: 50 }}>
+          <div style={{ filter: 'drop-shadow(0 3px 8px rgba(80,180,60,0.6)) drop-shadow(0 1px 3px rgba(0,0,0,0.45))' }}>
+            <div
+              style={{
+                background: '#7ed321',
+                border: '2.5px solid #3a7a10',
+                borderRadius: 10,
+                padding: '4px 8px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                fontFamily: "'Caveat', cursive",
+                fontWeight: 800,
+                fontSize: 13,
+                color: '#1a3a06',
+                whiteSpace: 'nowrap',
+                lineHeight: 1.2,
+              }}
+            >
+              🌿 Villa de rêve
+            </div>
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderLeft: '6px solid transparent',
+                borderRight: '6px solid transparent',
+                borderTop: '8px solid #3a7a10',
+                margin: '-1px auto 0',
+              }}
+            />
           </div>
         </Marker>
 
@@ -248,14 +300,16 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
                 {poi.emoji}
               </div>
               {/* Pointe de bulle */}
-              <div style={{
-                width: 0,
-                height: 0,
-                borderLeft: '4px solid transparent',
-                borderRight: '4px solid transparent',
-                borderTop: '5px solid #fff',
-                margin: '-1px auto 0',
-              }} />
+              <div
+                style={{
+                  width: 0,
+                  height: 0,
+                  borderLeft: '4px solid transparent',
+                  borderRight: '4px solid transparent',
+                  borderTop: '5px solid #fff',
+                  margin: '-1px auto 0',
+                }}
+              />
               {hoveredPoi === poi.id && (
                 <div
                   className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 paper-card rounded-md px-2 py-1 whitespace-nowrap pointer-events-none"
@@ -278,9 +332,9 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
         {/* Pins jours de l'itinéraire — toujours prioritaires */}
         {days.map((day) => {
           const isActive = day.day === activeDay;
-          const bg = isActive ? '#ff3cac' : '#ffffff';
-          const border = isActive ? '#c4008a' : '#ff3cac';
-          const color = isActive ? '#fff' : '#c4008a';
+          const bg = isActive ? '#e8230a' : '#ffffff';
+          const border = isActive ? '#b81c08' : '#e8230a';
+          const color = isActive ? '#fff' : '#e8230a';
           return (
             <Marker
               key={day.day}
@@ -292,7 +346,9 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
             >
               <div
                 className="cursor-pointer relative"
-                style={{ filter: 'drop-shadow(0 2px 6px rgba(196,0,138,0.55)) drop-shadow(0 1px 2px rgba(0,0,0,0.4))' }}
+                style={{
+                  filter: 'drop-shadow(0 2px 6px rgba(232,35,10,0.55)) drop-shadow(0 1px 2px rgba(0,0,0,0.35))',
+                }}
                 onMouseEnter={() => setHoveredDay(day.day)}
                 onMouseLeave={() => setHoveredDay(null)}
               >
