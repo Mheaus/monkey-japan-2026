@@ -27,12 +27,12 @@ function useCountdown(target: Date) {
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="paper-card rounded-xl w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center">
-        <span className="text-3xl sm:text-5xl font-handwritten font-bold text-ink tabular-nums">
+      <div className="paper-card rounded-xl w-[4.5rem] h-[4.5rem] sm:w-28 sm:h-28 flex items-center justify-center">
+        <span className="text-2xl sm:text-5xl font-handwritten font-bold text-ink tabular-nums">
           {String(value).padStart(2, '0')}
         </span>
       </div>
-      <span className="mt-2 text-xs sm:text-sm font-handwritten font-medium text-ink/50 uppercase tracking-wider">
+      <span className="mt-1.5 text-[10px] sm:text-sm font-handwritten font-medium text-ink/50 uppercase tracking-wider">
         {label}
       </span>
     </div>
@@ -67,7 +67,7 @@ const quickLinks = [
     to: '/planning',
     emoji: '🗾',
     title: 'Planning',
-    subtitle: '17 jours d\'aventure',
+    subtitle: "17 jours d'aventure",
     rotation: '-1deg',
     bg: 'bg-ocean/5',
   },
@@ -116,15 +116,11 @@ export default function Home() {
         >
           {/* Title - carnet de voyage style */}
           <div className="relative inline-block mb-4">
-            <h1 className="text-6xl sm:text-8xl font-handwritten font-bold text-ink leading-tight">
-              Monkey Japan
-            </h1>
+            <h1 className="text-6xl sm:text-8xl font-handwritten font-bold text-ink leading-tight">Monkey Japan</h1>
             <div className="stamp absolute -top-2 -right-6 sm:-right-10 text-xs sm:text-sm">2026</div>
           </div>
 
-          <p className="font-handwritten text-xl sm:text-2xl text-ink/60 mb-2">
-            19 mai - 4 juin 2026
-          </p>
+          <p className="font-handwritten text-xl sm:text-2xl text-ink/60 mb-2">19 mai - 4 juin 2026</p>
           <p className="text-sm text-ink/40 mb-6">Tokyo & alentours</p>
 
           {/* Members - like stickers on a notebook */}
@@ -158,13 +154,13 @@ export default function Home() {
               C'est parti ! いってきます!
             </motion.div>
           ) : (
-            <div className="flex items-center justify-center gap-3 sm:gap-5 mb-10">
+            <div className="flex items-center justify-center gap-1.5 sm:gap-5 mb-10">
               <CountdownUnit value={countdown.days} label="jours" />
-              <span className="text-3xl text-stamp-red font-handwritten font-bold mt-[-20px]">:</span>
+              <span className="text-xl sm:text-3xl text-stamp-red font-handwritten font-bold mt-[-20px]">:</span>
               <CountdownUnit value={countdown.hours} label="heures" />
-              <span className="text-3xl text-stamp-red font-handwritten font-bold mt-[-20px]">:</span>
+              <span className="text-xl sm:text-3xl text-stamp-red font-handwritten font-bold mt-[-20px]">:</span>
               <CountdownUnit value={countdown.minutes} label="minutes" />
-              <span className="text-3xl text-stamp-red font-handwritten font-bold mt-[-20px]">:</span>
+              <span className="text-xl sm:text-3xl text-stamp-red font-handwritten font-bold mt-[-20px]">:</span>
               <CountdownUnit value={countdown.seconds} label="secondes" />
             </div>
           )}
