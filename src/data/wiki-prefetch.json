@@ -1,0 +1,412 @@
+{
+  "Akihabara": {
+    "title": "Akihabara",
+    "description": "Shopping area in Chiyoda, Tokyo, Japan",
+    "image": "/img/wiki/akihabara.png"
+  },
+  "Ameyoko": {
+    "title": "Ameya-Yokochō",
+    "description": "Open-air market in the Taito Ward of Tokyo, Japan",
+    "image": "/img/wiki/ameyoko.jpg"
+  },
+  "Atami": {
+    "title": "Atami",
+    "description": "City in Chūbu, Japan",
+    "image": "/img/wiki/atami.jpg"
+  },
+  "Chiba Prefecture": {
+    "title": "Chiba Prefecture",
+    "description": "Prefecture of Japan",
+    "image": "/img/wiki/chiba-prefecture.jpg"
+  },
+  "Convenience store in Japan": {
+    "title": "Convenience store in Japan",
+    "description": "",
+    "image": null
+  },
+  "Daikanyama": {
+    "title": "Daikanyamachō, Shibuya",
+    "description": "District in Shibuya, Tokyo, Japan",
+    "image": "/img/wiki/daikanyama.jpg"
+  },
+  "Don Quijote (retailer)": {
+    "title": "Don Quijote (retailer)",
+    "description": "",
+    "image": null
+  },
+  "Enoshima": {
+    "title": "Enoshima",
+    "description": "Offshore island in Fujisawa, Kanagawa prefecture, Japan",
+    "image": "/img/wiki/enoshima.jpg"
+  },
+  "Fuji Television": {
+    "title": "Fuji Television",
+    "description": "Japanese television station in Tokyo",
+    "image": "/img/wiki/fuji-television.jpg"
+  },
+  "Ginza": {
+    "title": "Ginza",
+    "description": "Shopping, business, and entertainment district in Chuo, Tokyo, Japan",
+    "image": "/img/wiki/ginza.jpg"
+  },
+  "Hakone": {
+    "title": "Hakone",
+    "description": "Town in Kantō, Japan",
+    "image": "/img/wiki/hakone.jpg"
+  },
+  "Hamarikyu Gardens": {
+    "title": "Hama-rikyū Gardens",
+    "description": "Park in Chūō, Tokyo, Japan",
+    "image": "/img/wiki/hamarikyu-gardens.jpg"
+  },
+  "Haneda Airport": {
+    "title": "Haneda Airport",
+    "description": "Major international airport serving Tokyo, Japan",
+    "image": "/img/wiki/haneda-airport.jpg"
+  },
+  "Harajuku": {
+    "title": "Harajuku",
+    "description": "District in Shibuya, Tokyo, Japan",
+    "image": "/img/wiki/harajuku.jpg"
+  },
+  "Hase-dera, Kamakura": {
+    "title": "Hase-dera, Kamakura",
+    "description": "",
+    "image": null
+  },
+  "Isetan": {
+    "title": "Isetan",
+    "description": "Japanese department store chain",
+    "image": "/img/wiki/isetan.png"
+  },
+  "Ito, Shizuoka": {
+    "title": "Itō, Shizuoka",
+    "description": "City in Chūbu, Japan",
+    "image": "/img/wiki/ito-shizuoka.jpg"
+  },
+  "Izu Peninsula": {
+    "title": "Izu Peninsula",
+    "description": "Peninsula in Kantō, Japan",
+    "image": "/img/wiki/izu-peninsula.jpg"
+  },
+  "Jimbocho, Tokyo": {
+    "title": "Jimbocho, Tokyo",
+    "description": "",
+    "image": null
+  },
+  "Jimbōchō, Chiyoda": {
+    "title": "Jimbōchō, Chiyoda",
+    "description": "",
+    "image": null
+  },
+  "Jogasaki Coast": {
+    "title": "Jogasaki Coast",
+    "description": "",
+    "image": null
+  },
+  "Kabukicho": {
+    "title": "Kabukichō",
+    "description": "District located in Shinjuku-ku, Tokyo",
+    "image": "/img/wiki/kabukicho.jpg"
+  },
+  "Kamakura": {
+    "title": "Kamakura",
+    "description": "City in Kantō",
+    "image": "/img/wiki/kamakura.jpg"
+  },
+  "Kaminarimon": {
+    "title": "Kaminarimon",
+    "description": "Gate entrance in Asakusa, Japan",
+    "image": "/img/wiki/kaminarimon.jpg"
+  },
+  "Kanda Myōjin": {
+    "title": "Kanda Shrine",
+    "description": "Shinto shrine in Tokyo, Japan",
+    "image": "/img/wiki/kanda-myojin.jpg"
+  },
+  "Kappabashi Street": {
+    "title": "Kappabashi Street",
+    "description": "",
+    "image": null
+  },
+  "Kawazu Seven Waterfalls": {
+    "title": "Kawazu Seven Waterfalls",
+    "description": "",
+    "image": null
+  },
+  "Kawazu, Shizuoka": {
+    "title": "Kawazu, Shizuoka",
+    "description": "Town in Japan",
+    "image": "/img/wiki/kawazu-shizuoka.jpg"
+  },
+  "Keikyu Electric Railway": {
+    "title": "Keikyu Electric Railway",
+    "description": "",
+    "image": null
+  },
+  "Kōtoku-in": {
+    "title": "Kōtoku-in",
+    "description": "Buddhist temple in Kamakura, Japan",
+    "image": "/img/wiki/kotoku-in.jpg"
+  },
+  "Lake Ashi": {
+    "title": "Lake Ashi",
+    "description": "Crater lake in Japan",
+    "image": "/img/wiki/lake-ashi.jpg"
+  },
+  "Landmark Tower, Yokohama": {
+    "title": "Landmark Tower, Yokohama",
+    "description": "",
+    "image": null
+  },
+  "Manga": {
+    "title": "Manga",
+    "description": "Japanese comics or graphic novels",
+    "image": "/img/wiki/manga.jpg"
+  },
+  "Meguro River": {
+    "title": "Meguro River",
+    "description": "River in Japan",
+    "image": "/img/wiki/meguro-river.jpg"
+  },
+  "Meiji Shrine": {
+    "title": "Meiji Shrine",
+    "description": "Shinto shrine in Tokyo, Japan",
+    "image": "/img/wiki/meiji-shrine.jpg"
+  },
+  "Minato Mirai 21": {
+    "title": "Minato Mirai 21",
+    "description": "Central business district of Yokohama, Japan",
+    "image": "/img/wiki/minato-mirai-21.jpg"
+  },
+  "Mishima Grand Shrine": {
+    "title": "Mishima Grand Shrine",
+    "description": "",
+    "image": null
+  },
+  "Mishima, Shizuoka": {
+    "title": "Mishima, Shizuoka",
+    "description": "City in Chūbu, Japan",
+    "image": "/img/wiki/mishima-shizuoka.png"
+  },
+  "Miyashita Park": {
+    "title": "Miyashita Park",
+    "description": "Park in Shibuya, Tokyo, Japan",
+    "image": "/img/wiki/miyashita-park.jpg"
+  },
+  "Mount Fuji": {
+    "title": "Mount Fuji",
+    "description": "Volcano in Japan",
+    "image": "/img/wiki/mount-fuji.jpg"
+  },
+  "Mount Nokogiri": {
+    "title": "Mount Nokogiri",
+    "description": "Topics referred to by the same term",
+    "image": null
+  },
+  "Nakameguro": {
+    "title": "Nakameguro",
+    "description": "Neighborhood in Meguro-ku, Tokyo, Japan",
+    "image": "/img/wiki/nakameguro.jpg"
+  },
+  "Nakamise": {
+    "title": "Nakamise",
+    "description": "",
+    "image": null
+  },
+  "Nihon-ji": {
+    "title": "Nihon-ji",
+    "description": "Buddhist temple in Chiba Prefecture, Japan",
+    "image": "/img/wiki/nihon-ji.jpg"
+  },
+  "Odaiba, Tokyo": {
+    "title": "Odaiba, Tokyo",
+    "description": "",
+    "image": null
+  },
+  "Odawara Castle": {
+    "title": "Odawara Castle",
+    "description": "Reconstructed castle in Odawara, Kanagawa Prefecture, Japan",
+    "image": "/img/wiki/odawara-castle.jpg"
+  },
+  "Omoide Yokocho": {
+    "title": "Omoide Yokocho",
+    "description": "",
+    "image": null
+  },
+  "Omotesando": {
+    "title": "Omotesandō",
+    "description": "Avenue in Tokyo",
+    "image": "/img/wiki/omotesando.jpg"
+  },
+  "Palette Town": {
+    "title": "Palette Town",
+    "description": "Former shopping mall and entertainment complex in Tokyo, Japan",
+    "image": "/img/wiki/palette-town.jpg"
+  },
+  "Park Hyatt Tokyo": {
+    "title": "Shinjuku Park Tower",
+    "description": "Skyscraper located in Tokyo",
+    "image": "/img/wiki/park-hyatt-tokyo.jpg"
+  },
+  "Rainbow Bridge, Tokyo": {
+    "title": "Rainbow Bridge (Tokyo)",
+    "description": "Bridge in Tokyo, Japan",
+    "image": "/img/wiki/rainbow-bridge-tokyo.jpg"
+  },
+  "Ramen": {
+    "title": "Ramen",
+    "description": "Japanese noodle dish",
+    "image": "/img/wiki/ramen.jpg"
+  },
+  "Retrogaming": {
+    "title": "Retro gaming",
+    "description": "Cultural activity with old video games",
+    "image": "/img/wiki/retrogaming.jpg"
+  },
+  "Sagami Bay": {
+    "title": "Sagami Bay",
+    "description": "Bay in Kanagawa, Japan",
+    "image": "/img/wiki/sagami-bay.jpg"
+  },
+  "Scramble Square, Tokyo": {
+    "title": "Scramble Square, Tokyo",
+    "description": "",
+    "image": null
+  },
+  "Sensō-ji": {
+    "title": "Sensō-ji",
+    "description": "Buddhist temple in Tokyo, Japan",
+    "image": "/img/wiki/senso-ji.jpg"
+  },
+  "Shibuya Crossing": {
+    "title": "Shibuya Crossing",
+    "description": "Scramble crossing in Tokyo",
+    "image": "/img/wiki/shibuya-crossing.jpg"
+  },
+  "Shibuya, Tokyo": {
+    "title": "Shibuya",
+    "description": "Special ward in Tokyo, Japan",
+    "image": "/img/wiki/shibuya-tokyo.jpg"
+  },
+  "Shimokitazawa": {
+    "title": "Shimokitazawa",
+    "description": "Area in Kitazawa, Setagaya, Tokyo",
+    "image": "/img/wiki/shimokitazawa.jpg"
+  },
+  "Shinjuku": {
+    "title": "Shinjuku",
+    "description": "Special ward in Kantō, Japan",
+    "image": "/img/wiki/shinjuku.jpg"
+  },
+  "Shinjuku Station": {
+    "title": "Shinjuku Station",
+    "description": "Major railway and metro station in Tokyo, Japan",
+    "image": "/img/wiki/shinjuku-station.jpg"
+  },
+  "Shuzenji": {
+    "title": "Shuzen-ji",
+    "description": "Buddhist temple in Shizuoka Prefecture, Japan",
+    "image": "/img/wiki/shuzenji.jpg"
+  },
+  "Sumida River": {
+    "title": "Sumida River",
+    "description": "River in central Tokyo, Japan",
+    "image": "/img/wiki/sumida-river.jpg"
+  },
+  "Sushi": {
+    "title": "Sushi",
+    "description": "Japanese dish of vinegared rice and seafood",
+    "image": "/img/wiki/sushi.jpg"
+  },
+  "Takashimaya": {
+    "title": "Takashimaya",
+    "description": "Japanese department store",
+    "image": "/img/wiki/takashimaya.jpg"
+  },
+  "Takeshita Street": {
+    "title": "Harajuku",
+    "description": "District in Shibuya, Tokyo, Japan",
+    "image": "/img/wiki/takeshita-street.jpg"
+  },
+  "Tateyama, Chiba": {
+    "title": "Tateyama, Chiba",
+    "description": "City in Kantō, Japan",
+    "image": "/img/wiki/tateyama-chiba.jpg"
+  },
+  "Tokyo Bay": {
+    "title": "Tokyo Bay",
+    "description": "Bay in Kantō region, Japan",
+    "image": "/img/wiki/tokyo-bay.jpg"
+  },
+  "Tokyo International Airport": {
+    "title": "Haneda Airport",
+    "description": "Major international airport serving Tokyo, Japan",
+    "image": "/img/wiki/tokyo-international-airport.jpg"
+  },
+  "Tokyo National Museum": {
+    "title": "Tokyo National Museum",
+    "description": "Art museum in Tokyo, Japan",
+    "image": "/img/wiki/tokyo-national-museum.jpg"
+  },
+  "Tokyo Skytree": {
+    "title": "Tokyo Skytree",
+    "description": "Broadcasting and observation tower in Japan",
+    "image": "/img/wiki/tokyo-skytree.jpg"
+  },
+  "Toyosu Market": {
+    "title": "Toyosu Market",
+    "description": "Wholesale market in Tokyo, Japan",
+    "image": "/img/wiki/toyosu-market.jpg"
+  },
+  "Tsukiji market": {
+    "title": "Tsukiji market",
+    "description": "",
+    "image": null
+  },
+  "Ueno Park": {
+    "title": "Ueno Park",
+    "description": "Park in Tokyo, Japan",
+    "image": "/img/wiki/ueno-park.jpg"
+  },
+  "Ueno Zoo": {
+    "title": "Ueno Zoo",
+    "description": "Zoo in Taitō, Tokyo, Japan",
+    "image": "/img/wiki/ueno-zoo.jpg"
+  },
+  "Yanaka, Tokyo": {
+    "title": "Yanaka, Tokyo",
+    "description": "Neighborhood in Taitō-ku, Tokyo",
+    "image": "/img/wiki/yanaka-tokyo.jpg"
+  },
+  "Yodobashi Camera": {
+    "title": "Yodobashi Camera",
+    "description": "Japanese retail chain",
+    "image": "/img/wiki/yodobashi-camera.jpg"
+  },
+  "Yokohama Chinatown": {
+    "title": "Yokohama Chinatown",
+    "description": "Neighborhood in Yokohama, Japan",
+    "image": "/img/wiki/yokohama-chinatown.jpg"
+  },
+  "Yoyogi Park": {
+    "title": "Yoyogi Park",
+    "description": "Park in Shibuya, Tokyo, Japan",
+    "image": "/img/wiki/yoyogi-park.jpg"
+  },
+  "Yuigahama": {
+    "title": "Yuigahama",
+    "description": "Beach in Kamakura, Kanagawa, Japan",
+    "image": "/img/wiki/yuigahama.jpg"
+  },
+  "teamLab": {
+    "title": "OnlyOffice",
+    "description": "Office suite developed by Ascensio System SIA",
+    "image": null
+  },
+  "Ōedo Onsen Monogatari": {
+    "title": "Ōedo Onsen Monogatari",
+    "description": "",
+    "image": null
+  }
+}

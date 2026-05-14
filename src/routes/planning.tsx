@@ -2,15 +2,32 @@ import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { ITINERARY } from '~/data/trip';
+import wikiPrefetch from '~/data/wiki-prefetch.json';
 
 type WikiPhoto = { src: string; caption: string; article: string };
 type WikiSummary = { thumbnail: string | null; description: string; title: string };
+
+const PREFETCH: Record<string, { title: string; description: string; image: string | null }> = wikiPrefetch;
 
 const wikiCache = new Map<string, Promise<WikiSummary | null>>();
 
 function fetchWikiSummary(article: string): Promise<WikiSummary | null> {
   const cached = wikiCache.get(article);
   if (cached) return cached;
+
+  // Use the build-time prefetched data when available — works offline and
+  // avoids an online round-trip + Wikipedia rate limits entirely.
+  const pre = PREFETCH[article];
+  if (pre) {
+    const promise = Promise.resolve<WikiSummary>({
+      thumbnail: pre.image,
+      description: pre.description,
+      title: pre.title,
+    });
+    wikiCache.set(article, promise);
+    return promise;
+  }
+
   const promise = fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(article)}`)
     .then((r) => (r.ok ? r.json() : null))
     .then((data: { thumbnail?: { source?: string }; description?: string; title?: string } | null) => {
