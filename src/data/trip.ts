@@ -1,13 +1,98 @@
 export const TRIP_START = new Date('2026-05-19T00:00:00+09:00');
 export const TRIP_END = new Date('2026-06-04T23:59:59+09:00');
 
+export const DEPARTURE_TIME = new Date('2026-05-19T10:30:00+02:00');
+export const ARRIVAL_TIME = new Date('2026-05-20T09:45:00+09:00');
+
+export type FlightGroup = 'lh' | 'af';
+
+export type FlightLeg = {
+  ident: string;
+  group: FlightGroup;
+  airline: string;
+  from: { code: string; city: string };
+  to: { code: string; city: string };
+  scheduledDeparture: Date;
+  scheduledArrival: Date;
+  gateOrigin?: string;
+  terminalOrigin?: string;
+  gateDestination?: string;
+  terminalDestination?: string;
+};
+
+export const GROUPS: Record<FlightGroup, { label: string; short: string; emoji: string; color: string }> = {
+  lh: { label: 'Lufthansa (groupe)', short: 'Groupe', emoji: '🇩🇪', color: '#0c2340' },
+  af: { label: 'Air France (Mathieu)', short: 'Mathieu', emoji: '🇫🇷', color: '#002654' },
+};
+
+export const FLIGHTS: FlightLeg[] = [
+  {
+    ident: 'LH1071',
+    group: 'lh',
+    airline: 'Lufthansa',
+    from: { code: 'BOD', city: 'Bordeaux' },
+    to: { code: 'FRA', city: 'Francfort' },
+    scheduledDeparture: new Date('2026-05-19T10:30:00+02:00'),
+    scheduledArrival: new Date('2026-05-19T12:15:00+02:00'),
+    gateOrigin: 'B3',
+    terminalOrigin: '1',
+    gateDestination: 'A21',
+    terminalDestination: '1',
+  },
+  {
+    ident: 'LH716',
+    group: 'lh',
+    airline: 'Lufthansa',
+    from: { code: 'FRA', city: 'Francfort' },
+    to: { code: 'HND', city: 'Tokyo' },
+    scheduledDeparture: new Date('2026-05-19T14:05:00+02:00'),
+    scheduledArrival: new Date('2026-05-20T09:45:00+09:00'),
+    gateOrigin: 'A21',
+    terminalOrigin: '1',
+    terminalDestination: '3',
+  },
+  {
+    ident: 'AF7431',
+    group: 'af',
+    airline: 'Air France',
+    from: { code: 'BOD', city: 'Bordeaux' },
+    to: { code: 'CDG', city: 'Paris CDG' },
+    scheduledDeparture: new Date('2026-05-19T09:55:00+02:00'),
+    scheduledArrival: new Date('2026-05-19T11:20:00+02:00'),
+    gateOrigin: '22',
+    terminalOrigin: 'B',
+    terminalDestination: '2F',
+  },
+  {
+    ident: 'AF286',
+    group: 'af',
+    airline: 'Air France',
+    from: { code: 'CDG', city: 'Paris CDG' },
+    to: { code: 'HND', city: 'Tokyo' },
+    scheduledDeparture: new Date('2026-05-19T12:40:00+02:00'),
+    scheduledArrival: new Date('2026-05-20T08:55:00+09:00'),
+    terminalOrigin: '2E',
+    terminalDestination: '3',
+  },
+];
+
+export const FLIGHTS_BY_IDENT: Record<string, FlightLeg> = Object.fromEntries(FLIGHTS.map((f) => [f.ident, f]));
+
+export function flightsForGroup(group: FlightGroup): FlightLeg[] {
+  return FLIGHTS.filter((f) => f.group === group);
+}
+
 export const MEMBERS = [
-  { name: 'Mathieu', emoji: '🐵', color: '#e63946' },
-  { name: 'Alexis', emoji: '🦊', color: '#457b9d' },
-  { name: 'Luca', emoji: '🐺', color: '#7fb069' },
-  { name: 'Dylan', emoji: '🐻', color: '#d4a574' },
-  { name: 'Guillaume', emoji: '🦁', color: '#9b59b6' },
+  { name: 'Mathieu', emoji: '🐵', color: '#e63946', group: 'af' as FlightGroup },
+  { name: 'Alexis', emoji: '🦊', color: '#457b9d', group: 'lh' as FlightGroup },
+  { name: 'Luca', emoji: '🐺', color: '#7fb069', group: 'lh' as FlightGroup },
+  { name: 'Dylan', emoji: '🐻', color: '#d4a574', group: 'lh' as FlightGroup },
+  { name: 'Guillaume', emoji: '🦁', color: '#9b59b6', group: 'lh' as FlightGroup },
 ] as const;
+
+export function membersInGroup(group: FlightGroup) {
+  return MEMBERS.filter((m) => m.group === group);
+}
 
 export type DayOption = {
   label: string;
