@@ -47,16 +47,6 @@ export default defineConfig({
         clientsClaim: true,
         runtimeCaching: [
           {
-            urlPattern: /^https?:\/\/[^/]+\/(?!api\/|assets\/|sw\.js|workbox-).*$/i,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'pages',
-              networkTimeoutSeconds: 3,
-              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 7 },
-              cacheableResponse: { statuses: [200] },
-            },
-          },
-          {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
             options: {
@@ -108,6 +98,18 @@ export default defineConfig({
               cacheName: 'flight-api',
               networkTimeoutSeconds: 5,
               expiration: { maxEntries: 20, maxAgeSeconds: 60 * 5 },
+              cacheableResponse: { statuses: [200] },
+            },
+          },
+          // Catch-all for same-origin navigation requests not handled by precache
+          // (registered last so specific cross-origin rules above take precedence).
+          {
+            urlPattern: ({ request, sameOrigin }) => sameOrigin && request.mode === 'navigate',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'pages',
+              networkTimeoutSeconds: 3,
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 7 },
               cacheableResponse: { statuses: [200] },
             },
           },

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@heroui/react": "^2.8.7",
+    "@iconify-icons/lucide": "^1.2.135",
     "@iconify/react": "^6.0.2",
     "@react-aria/i18n": "^3.12.14",
     "@react-router/node": "^7.11.0",

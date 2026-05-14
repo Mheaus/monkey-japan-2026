@@ -11,6 +11,9 @@ importers:
       '@heroui/react':
         specifier: ^2.8.7
         version: 2.8.10(@types/react@19.2.14)(framer-motion@11.18.2(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(tailwindcss@4.2.2)
+      '@iconify-icons/lucide':
+        specifier: ^1.2.135
+        version: 1.2.135
       '@iconify/react':
         specifier: ^6.0.2
         version: 6.0.2(react@19.2.5)
@@ -1363,6 +1366,9 @@ packages:
       '@heroui/theme': '>=2.4.24'
       react: '>=18 || >=19.0.0-rc.0'
       react-dom: '>=18 || >=19.0.0-rc.0'
+
+  '@iconify-icons/lucide@1.2.135':
+    resolution: {integrity: sha512-t2Dya1a+PInBmHScbbGyseze7rrGHRW/dYF4GTR6f51N08sCg6KrtE4zmplnZE1ul2NyC+sxKpXRCv48hEgaQw==}
 
   '@iconify/react@6.0.2':
     resolution: {integrity: sha512-SMmC2sactfpJD427WJEDN6PMyznTFMhByK9yLW0gOTtnjzzbsi/Ke/XqsumsavFPwNiXs8jSiYeZTmLCLwO+Fg==}
@@ -6138,6 +6144,10 @@ snapshots:
       '@react-aria/focus': 3.21.5(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
+
+  '@iconify-icons/lucide@1.2.135':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify/react@6.0.2(react@19.2.5)':
     dependencies:

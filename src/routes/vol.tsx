@@ -17,15 +17,19 @@ function useCountdown(target: Date | null) {
   const diff = target.getTime() - now.getTime();
   if (diff <= 0) return null;
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
   return { days, hours, minutes, seconds };
 }
 
 function formatCountdown(c: { days: number; hours: number; minutes: number; seconds: number }) {
-  if (c.days > 0) return `${c.days}j ${c.hours % 24}h ${c.minutes}m`;
+  if (c.days > 0) return `${c.days}j ${c.hours}h ${c.minutes}m`;
   return `${c.hours > 0 ? `${c.hours}h ` : ''}${String(c.minutes).padStart(2, '0')}m ${String(c.seconds).padStart(2, '0')}s`;
+}
+
+function arrivalTzFor(code: string): 'paris' | 'tokyo' {
+  return code === 'HND' || code === 'NRT' ? 'tokyo' : 'paris';
 }
 
 function phaseLabel(phase: Phase): { title: string; emoji: string; subtitle: string } {
@@ -89,13 +93,18 @@ function Timeline({ phase, legs }: { phase: Phase; legs: FlightLeg[] }) {
   );
 }
 
-function GroupSection({ group }: { group: FlightGroup }) {
+function GroupSection({
+  group,
+  first,
+  long,
+}: {
+  group: FlightGroup;
+  first: FlightStatusResult;
+  long: FlightStatusResult;
+}) {
   const legs = flightsForGroup(group);
   const members = membersInGroup(group);
   const meta = GROUPS[group];
-
-  const first = useFlightStatus(legs[0]);
-  const long = useFlightStatus(legs[1]);
 
   const phase = derivePhase(first.data, long.data);
   const { target } = computeCountdownTarget(phase, first.data, long.data);
@@ -134,8 +143,20 @@ function GroupSection({ group }: { group: FlightGroup }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <FlightCard leg={legs[0]} status={first.data} loaded={first.loaded} arrivalTz="paris" variant="detailed" />
-        <FlightCard leg={legs[1]} status={long.data} loaded={long.loaded} arrivalTz="tokyo" variant="detailed" />
+        <FlightCard
+          leg={legs[0]}
+          status={first.data}
+          loaded={first.loaded}
+          arrivalTz={arrivalTzFor(legs[0].to.code)}
+          variant="detailed"
+        />
+        <FlightCard
+          leg={legs[1]}
+          status={long.data}
+          loaded={long.loaded}
+          arrivalTz={arrivalTzFor(legs[1].to.code)}
+          variant="detailed"
+        />
       </div>
     </section>
   );
@@ -203,8 +224,8 @@ export default function VolPage() {
           <p className="text-ink/50 text-sm">2 itinéraires · 19 mai 2026</p>
         </header>
 
-        <GroupSection group="lh" />
-        <GroupSection group="af" />
+        <GroupSection group="lh" first={lh1071} long={lh716} />
+        <GroupSection group="af" first={af7431} long={af286} />
 
         <StatusFooter results={[lh1071, lh716, af7431, af286]} />
       </motion.div>

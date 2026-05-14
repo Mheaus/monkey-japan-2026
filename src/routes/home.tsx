@@ -136,7 +136,9 @@ function HeroPre() {
       <p className="text-sm text-ink/50 mt-4 font-handwritten">
         🛫 LH1071 · 19 mai · {fmtTime(DEPARTURE_TIME.toISOString(), 'paris')} (Paris)
       </p>
-      <p className="text-xs text-ink/40 mt-1 font-handwritten">🐵 Mathieu : AF7431 · 9:55 (Paris)</p>
+      <p className="text-xs text-ink/40 mt-1 font-handwritten">
+        🐵 Mathieu : {FLIGHTS[2].ident} · {fmtTime(FLIGHTS[2].scheduledDeparture.toISOString(), 'paris')} (Paris)
+      </p>
     </div>
   );
 }

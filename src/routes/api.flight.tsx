@@ -151,21 +151,21 @@ function normalize(f: AeroFlight): FlightStatus {
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const ident = params.ident;
-  if (!ident || !/^[A-Z0-9]{2,8}$/i.test(ident)) {
-    return Response.json({ error: 'Invalid ident' }, { status: 400 });
+  const ident = (params.ident ?? '').toUpperCase();
+  const staticLeg = FLIGHTS_BY_IDENT[ident];
+  if (!staticLeg) {
+    return Response.json({ error: 'Unknown flight', flight: null }, { status: 404 });
   }
 
   const apiKey = process.env.AEROAPI_KEY;
   if (!apiKey) {
     return Response.json(
-      { error: 'AEROAPI_KEY missing on server', flight: null },
-      { status: 500, headers: { 'Cache-Control': 'no-store' } },
+      { flight: buildStaticStatus(staticLeg), count: 0, source: 'static', reason: 'missing-key' },
+      { headers: { 'Cache-Control': 'public, max-age=300, s-maxage=300' } },
     );
   }
 
-  const cacheKey = ident.toUpperCase();
-  const staticLeg = FLIGHTS_BY_IDENT[cacheKey];
+  const cacheKey = ident;
 
   const hit = readCache(cacheKey);
   if (hit) {
@@ -193,7 +193,7 @@ export async function loader({ params }: Route.LoaderArgs) {
   const start = new Date(startMs).toISOString();
   const end = new Date(endMs).toISOString();
 
-  const url = `${AEROAPI_BASE}/flights/${encodeURIComponent(ident)}?start=${start}&end=${end}`;
+  const url = `${AEROAPI_BASE}/flights/${encodeURIComponent(cacheKey)}?start=${start}&end=${end}`;
 
   try {
     const res = await fetch(url, {

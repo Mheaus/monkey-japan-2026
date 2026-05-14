@@ -50,11 +50,32 @@ export async function fetchFlight(ident: string): Promise<FlightApiResponse> {
   return (await res.json()) as FlightApiResponse;
 }
 
+function tsOrNull(iso: string | null | undefined): number | null {
+  if (!iso) return null;
+  const t = new Date(iso).getTime();
+  return Number.isNaN(t) ? null : t;
+}
+
 export function derivePhase(s1: FlightStatus | null, s2: FlightStatus | null): Phase {
   if (s2?.actualOn) return 'arrived';
   if (s2?.actualOff) return 'lh716';
   if (s1?.actualOn) return 'layover';
   if (s1?.actualOff) return 'lh1071';
+
+  // Time-based fallback when AeroAPI hasn't reported actual events yet
+  // (pre-J-2 window, offline, or any silent API). Uses scheduled times
+  // from the static fallback so the home page still progresses past 'pre'
+  // even without a successful API call.
+  const now = Date.now();
+  const s2Arr = tsOrNull(s2?.estimatedIn ?? s2?.scheduledIn ?? s2?.scheduledOn);
+  const s2Dep = tsOrNull(s2?.estimatedOut ?? s2?.scheduledOut ?? s2?.scheduledOff);
+  const s1Arr = tsOrNull(s1?.estimatedIn ?? s1?.scheduledIn ?? s1?.scheduledOn);
+  const s1Dep = tsOrNull(s1?.estimatedOut ?? s1?.scheduledOut ?? s1?.scheduledOff);
+
+  if (s2Arr && now >= s2Arr) return 'arrived';
+  if (s2Dep && now >= s2Dep) return 'lh716';
+  if (s1Arr && now >= s1Arr) return 'layover';
+  if (s1Dep && now >= s1Dep) return 'lh1071';
   return 'pre';
 }
 

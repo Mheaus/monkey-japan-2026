@@ -13,6 +13,7 @@ import { DevPhaseProvider } from '~/lib/dev-phase';
 import { DevPhaseToolbar } from '~/components/dev-phase-toolbar';
 import { PwaRegister } from '~/components/pwa-register';
 import { OfflineIndicator } from '~/components/offline-indicator';
+import '~/lib/offline-icons';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
