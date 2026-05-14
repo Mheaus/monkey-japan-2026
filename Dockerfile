@@ -7,7 +7,7 @@ WORKDIR /app
 
 # ── Install all dependencies ─────────────────────────────────────────
 FROM base AS deps
-COPY pnpm-lock.yaml package.json ./
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # ── Build ────────────────────────────────────────────────────────────
@@ -17,7 +17,7 @@ RUN pnpm build
 
 # ── Production dependencies ──────────────────────────────────────────
 FROM base AS prod-deps
-COPY pnpm-lock.yaml package.json ./
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 
 # ── Runtime ──────────────────────────────────────────────────────────

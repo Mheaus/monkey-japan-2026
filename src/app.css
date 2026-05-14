@@ -137,5 +137,16 @@ body {
 }
 
 .maplibregl-ctrl-attrib {
-  display: none;
+  background: rgba(255, 252, 245, 0.75) !important;
+  font-family: var(--font-handwritten) !important;
+  font-size: 10px !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: var(--color-ink) !important;
+  opacity: 0.6;
+}
+
+.maplibregl-ctrl-attrib a:hover {
+  opacity: 1;
 }
