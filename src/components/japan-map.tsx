@@ -51,7 +51,7 @@ const VILLA = { lat: 34.7963, lon: 138.9986 };
 
 // Override des couleurs par layer — mer bleu nuit, terre verte, axes rouge foncé
 function applyCustomColors(map: MaplibreMap) {
-  const { layers } = map.getStyle();
+  const layers = map.getStyle().layers ?? [];
   for (const layer of layers) {
     const id = layer.id.toLowerCase();
     try {
@@ -197,7 +197,8 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
           );
           updateViewport();
         }}
-        onMove={updateViewport}
+        onMoveEnd={updateViewport}
+        onZoomEnd={updateViewport}
       >
         <NavigationControl position="top-right" />
 
@@ -398,10 +399,6 @@ export default function JapanMap({ days, activeDay, onDayClick }: JapanMapProps)
           );
         })}
       </Map>
-
-      <div className="absolute bottom-2 right-12 z-20 text-[9px] text-ink/30 font-handwritten pointer-events-none">
-        © OpenStreetMap · OpenFreeMap
-      </div>
     </div>
   );
 }

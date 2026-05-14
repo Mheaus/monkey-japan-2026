@@ -287,8 +287,8 @@ export const ITINERARY: DayPlan[] = [
       { label: 'Palette Town', time: '5 min', description: 'Centre rétro-futuriste reconverti' },
     ],
     tip: "teamLab a déménagé à Azabudai Hills — vérifiez les disponibilités très à l'avance.",
-    wikiArticles: ['Odaiba, Tokyo', 'Rainbow Bridge, Tokyo', 'Fuji Television', 'teamLab', 'Odaiba, Tokyo'],
-    optionArticles: ['teamLab', 'Odaiba, Tokyo', 'Odaiba, Tokyo'],
+    wikiArticles: ['Odaiba, Tokyo', 'Rainbow Bridge, Tokyo', 'Fuji Television', 'teamLab', 'Palette Town'],
+    optionArticles: ['teamLab', 'Ōedo Onsen Monogatari', 'Palette Town'],
   },
   {
     day: 13,
@@ -306,7 +306,7 @@ export const ITINERARY: DayPlan[] = [
       { label: 'Yuigahama Beach', time: '15 min à pied', description: 'Baignade si météo favorable' },
     ],
     tip: 'Vélo à louer à la gare de Kamakura (~500¥/h) — idéal pour relier les temples.',
-    wikiArticles: ['Kōtoku-in', 'Kamakura', 'Hase-dera, Kamakura', 'Enoshima', 'Kamakura'],
+    wikiArticles: ['Kōtoku-in', 'Kamakura', 'Hase-dera, Kamakura', 'Enoshima', 'Yuigahama'],
     optionArticles: ['Enoshima', 'Kamakura', 'Hase-dera, Kamakura'],
   },
   {
@@ -327,7 +327,7 @@ export const ITINERARY: DayPlan[] = [
     ],
     tip: 'Comptez 3–4h pour tout Nihon-ji. Beaucoup de marches — eau obligatoire.',
     wikiArticles: ['Mount Nokogiri', 'Nihon-ji', 'Chiba Prefecture', 'Tateyama, Chiba', 'Tokyo Bay'],
-    optionArticles: ['Hakone Ropeway', 'Tateyama, Chiba', 'Tokyo Bay'],
+    optionArticles: ['Mount Nokogiri', 'Tateyama, Chiba', 'Tokyo Bay'],
   },
   // ─── J15–J17 : FIN DU VOYAGE ────────────────────────────────────────
   {
@@ -400,7 +400,7 @@ export const ITINERARY: DayPlan[] = [
       'Ramen',
       'Convenience store in Japan',
     ],
-    optionArticles: ['Tokyo International Airport', 'Ramen', 'Narita International Airport'],
+    optionArticles: ['Tokyo International Airport', 'Ramen', 'Haneda Airport'],
   },
 ];
 

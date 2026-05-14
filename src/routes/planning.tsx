@@ -4,6 +4,42 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ITINERARY } from '~/data/trip';
 
 type WikiPhoto = { src: string; caption: string; article: string };
+type WikiSummary = { thumbnail: string | null; description: string; title: string };
+
+const wikiCache = new Map<string, Promise<WikiSummary | null>>();
+
+function fetchWikiSummary(article: string): Promise<WikiSummary | null> {
+  const cached = wikiCache.get(article);
+  if (cached) return cached;
+  const promise = fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(article)}`)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((data: { thumbnail?: { source?: string }; description?: string; title?: string } | null) => {
+      if (!data) return null;
+      return {
+        thumbnail: data.thumbnail?.source ?? null,
+        description: data.description ?? '',
+        title: data.title ?? article,
+      };
+    })
+    .catch(() => null);
+  wikiCache.set(article, promise);
+  return promise;
+}
+
+function useWikiSummary(article: string): WikiSummary | null | 'loading' {
+  const [state, setState] = React.useState<WikiSummary | null | 'loading'>('loading');
+  React.useEffect(() => {
+    let cancelled = false;
+    setState('loading');
+    fetchWikiSummary(article).then((data) => {
+      if (!cancelled) setState(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [article]);
+  return state;
+}
 
 function useWikiPhotos(articles: string[]) {
   const key = articles.join('||');
@@ -12,33 +48,25 @@ function useWikiPhotos(articles: string[]) {
   );
 
   React.useEffect(() => {
+    let cancelled = false;
     setPhotos(articles.map(() => 'loading' as const));
-    const controllers = articles.map(() => new AbortController());
 
     articles.forEach((article, i) => {
-      fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(article)}`, {
-        signal: controllers[i].signal,
-      })
-        .then((r) => r.json())
-        .then((data: { thumbnail?: { source?: string }; description?: string; title?: string }) => {
-          setPhotos((prev) => {
-            const next = [...prev];
-            next[i] = data.thumbnail?.source
-              ? { src: data.thumbnail.source, caption: data.description || data.title || article, article }
-              : null;
-            return next;
-          });
-        })
-        .catch(() => {
-          setPhotos((prev) => {
-            const next = [...prev];
-            next[i] = null;
-            return next;
-          });
+      fetchWikiSummary(article).then((data) => {
+        if (cancelled) return;
+        setPhotos((prev) => {
+          const next = [...prev];
+          next[i] = data?.thumbnail
+            ? { src: data.thumbnail, caption: data.description || data.title || article, article }
+            : null;
+          return next;
         });
+      });
     });
 
-    return () => controllers.forEach((c) => c.abort());
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
@@ -72,7 +100,7 @@ function PhotoModal({
 
   return (
     <div
-      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
       onClick={onClose}
     >
       <motion.div
@@ -151,12 +179,14 @@ function PhotoGallery({ articles }: { articles: string[] }) {
       <div>
         <p className="text-[10px] font-bold text-ink/30 uppercase tracking-widest mb-2">Photos</p>
         <div className="flex gap-2 overflow-x-auto pb-1">
-          {rawPhotos.map((p, i) =>
-            p === 'loading' ? (
-              <div key={i} className="w-28 h-20 shrink-0 rounded-lg bg-kraft/30 animate-pulse" />
-            ) : p === null ? null : (
+          {rawPhotos.map((p, i) => {
+            if (p === 'loading') {
+              return <div key={`loading-${i}`} className="w-28 h-20 shrink-0 rounded-lg bg-kraft/30 animate-pulse" />;
+            }
+            if (p === null) return null;
+            return (
               <button
-                key={p.article}
+                key={`${p.article}-${i}`}
                 type="button"
                 onClick={() => setModalIdx(loaded.indexOf(p))}
                 className="shrink-0 group relative w-28 h-20 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
@@ -167,8 +197,8 @@ function PhotoGallery({ articles }: { articles: string[] }) {
                   <p className="text-white text-[9px] font-handwritten font-bold leading-tight truncate">{p.article}</p>
                 </div>
               </button>
-            ),
-          )}
+            );
+          })}
         </div>
       </div>
 
@@ -226,81 +256,28 @@ function useSeenDays() {
 }
 
 function SidebarOptionPhoto({ article }: { article: string }) {
-  const [src, setSrc] = React.useState<string | null | 'loading'>('loading');
-  const [caption, setCaption] = React.useState('');
+  const summary = useWikiSummary(article);
 
-  React.useEffect(() => {
-    let cancelled = false;
-    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(article)}`)
-      .then((r) => r.json())
-      .then((data: { thumbnail?: { source?: string }; description?: string }) => {
-        if (!cancelled) {
-          setSrc(data.thumbnail?.source ?? null);
-          setCaption(data.description || '');
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setSrc(null);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [article]);
-
-  if (src === 'loading') return <div className="w-full h-24 rounded-lg bg-kraft/30 animate-pulse mt-2" />;
-  if (!src) return null;
+  if (summary === 'loading') return <div className="w-full h-24 rounded-lg bg-kraft/30 animate-pulse mt-2" />;
+  if (!summary?.thumbnail) return null;
   return (
     <div className="mt-2 rounded-lg overflow-hidden">
-      <img src={src} alt={article} className="w-full h-24 object-cover rounded-lg" />
-      {caption && <p className="text-[10px] text-ink/50 leading-snug mt-1">{caption}</p>}
+      <img src={summary.thumbnail} alt={article} className="w-full h-24 object-cover rounded-lg" />
+      {summary.description && <p className="text-[10px] text-ink/50 leading-snug mt-1">{summary.description}</p>}
     </div>
   );
 }
 
 function MiniThumb({ article }: { article: string }) {
-  const [src, setSrc] = React.useState<string | null | 'loading'>('loading');
+  const summary = useWikiSummary(article);
 
-  React.useEffect(() => {
-    let cancelled = false;
-    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(article)}`)
-      .then((r) => r.json())
-      .then((data: { thumbnail?: { source?: string } }) => {
-        if (!cancelled) setSrc(data.thumbnail?.source ?? null);
-      })
-      .catch(() => {
-        if (!cancelled) setSrc(null);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [article]);
-
-  if (src === 'loading') return <div className="w-10 h-10 rounded-lg bg-kraft/30 animate-pulse shrink-0" />;
-  if (!src) return <div className="w-10 h-10 rounded-lg bg-kraft/20 shrink-0" />;
-  return <img src={src} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" />;
+  if (summary === 'loading') return <div className="w-10 h-10 rounded-lg bg-kraft/30 animate-pulse shrink-0" />;
+  if (!summary?.thumbnail) return <div className="w-10 h-10 rounded-lg bg-kraft/20 shrink-0" />;
+  return <img src={summary.thumbnail} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" />;
 }
 
 function MobilePhotoModal({ article, label, onClose }: { article: string; label: string; onClose: () => void }) {
-  const [src, setSrc] = React.useState<string | null | 'loading'>('loading');
-  const [desc, setDesc] = React.useState('');
-
-  React.useEffect(() => {
-    let cancelled = false;
-    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(article)}`)
-      .then((r) => r.json())
-      .then((data: { thumbnail?: { source?: string }; description?: string }) => {
-        if (!cancelled) {
-          setSrc(data.thumbnail?.source ?? null);
-          setDesc(data.description || '');
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setSrc(null);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [article]);
+  const summary = useWikiSummary(article);
 
   React.useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -310,9 +287,24 @@ function MobilePhotoModal({ article, label, onClose }: { article: string; label:
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
+  let imageContent: React.ReactNode;
+  if (summary === 'loading') {
+    imageContent = <div className="w-full h-56 bg-kraft/30 animate-pulse" />;
+  } else if (summary?.thumbnail) {
+    imageContent = <img src={summary.thumbnail} alt={label} className="w-full h-56 object-cover" />;
+  } else {
+    imageContent = (
+      <div className="w-full h-32 bg-kraft/30 flex items-center justify-center">
+        <span className="text-ink/30 text-sm font-handwritten">Pas d'image disponible</span>
+      </div>
+    );
+  }
+
+  const desc = summary && summary !== 'loading' ? summary.description : '';
+
   return (
     <div
-      className="fixed inset-0 z-9999 flex items-end justify-center bg-black/70 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-[9999] flex items-end justify-center bg-black/70 backdrop-blur-sm p-4"
       onClick={onClose}
     >
       <motion.div
@@ -323,15 +315,7 @@ function MobilePhotoModal({ article, label, onClose }: { article: string; label:
         className="w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {src === 'loading' ? (
-          <div className="w-full h-56 bg-kraft/30 animate-pulse" />
-        ) : src ? (
-          <img src={src} alt={label} className="w-full h-56 object-cover" />
-        ) : (
-          <div className="w-full h-32 bg-kraft/30 flex items-center justify-center">
-            <span className="text-ink/30 text-sm font-handwritten">Pas d'image disponible</span>
-          </div>
-        )}
+        {imageContent}
         <div className="bg-white px-4 py-3">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
@@ -365,11 +349,6 @@ function SidebarDayCard({
   onSelect: () => void;
   onToggleSeen: () => void;
 }) {
-  const [activeOpt, setActiveOpt] = React.useState<number | null>(null);
-
-  React.useEffect(() => {
-    if (!isActive) setActiveOpt(null);
-  }, [isActive]);
   const optArticle = (i: number) => {
     if (day.optionArticles?.[i]) return day.optionArticles[i];
     const opt = day.options[i];
