@@ -126,12 +126,11 @@ export function FlightCard({
         )}
 
       {variant === 'detailed' && status && (
-        <div className="mt-3 pt-3 border-t border-kraft/40 text-xs text-ink/50">
-          {arrived ? (
-            <span>Atterri à {fmtTime(status.actualOn ?? status.actualIn, arrivalTz)}</span>
-          ) : (
-            <span>Statut AeroAPI : {status.status}</span>
-          )}
+        <div className="mt-3 pt-3 border-t border-kraft/40 flex items-center justify-between gap-2 text-xs text-ink/50">
+          <span>
+            {arrived ? <>Atterri à {fmtTime(status.actualOn ?? status.actualIn, arrivalTz)}</> : <>{status.status}</>}
+          </span>
+          {leg.aircraft && <span className="text-ink/40">{leg.aircraft}</span>}
         </div>
       )}
     </div>

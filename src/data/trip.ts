@@ -1,7 +1,11 @@
 export const TRIP_START = new Date('2026-05-19T00:00:00+09:00');
 export const TRIP_END = new Date('2026-06-04T23:59:59+09:00');
 
-export const DEPARTURE_TIME = new Date('2026-05-19T10:30:00+02:00');
+// Source of truth: AeroAPI /schedules pour le 19/05/2026 (vérifié 14/05).
+// Tout ce qui figure ici a été confirmé sur au moins 2 jours consécutifs OU
+// renvoyé par le schedules endpoint pour la date exacte du voyage. Les gates
+// qui varient quotidiennement (FRA, CDG départ long-courrier) sont omises.
+export const DEPARTURE_TIME = new Date('2026-05-19T10:35:00+02:00');
 export const ARRIVAL_TIME = new Date('2026-05-20T09:45:00+09:00');
 
 export type FlightGroup = 'lh' | 'af';
@@ -10,6 +14,7 @@ export type FlightLeg = {
   ident: string;
   group: FlightGroup;
   airline: string;
+  aircraft?: string;
   from: { code: string; city: string };
   to: { code: string; city: string };
   scheduledDeparture: Date;
@@ -30,47 +35,54 @@ export const FLIGHTS: FlightLeg[] = [
     ident: 'LH1071',
     group: 'lh',
     airline: 'Lufthansa',
+    aircraft: 'Airbus A319',
     from: { code: 'BOD', city: 'Bordeaux' },
     to: { code: 'FRA', city: 'Francfort' },
-    scheduledDeparture: new Date('2026-05-19T10:30:00+02:00'),
-    scheduledArrival: new Date('2026-05-19T12:15:00+02:00'),
-    gateOrigin: 'B3',
-    terminalOrigin: '1',
-    gateDestination: 'A21',
+    scheduledDeparture: new Date('2026-05-19T10:35:00+02:00'),
+    scheduledArrival: new Date('2026-05-19T12:25:00+02:00'),
+    gateOrigin: '25',
+    terminalOrigin: 'A',
+    gateDestination: 'A',
     terminalDestination: '1',
   },
   {
     ident: 'LH716',
     group: 'lh',
     airline: 'Lufthansa',
+    aircraft: 'Boeing 747-8',
     from: { code: 'FRA', city: 'Francfort' },
     to: { code: 'HND', city: 'Tokyo' },
     scheduledDeparture: new Date('2026-05-19T14:05:00+02:00'),
     scheduledArrival: new Date('2026-05-20T09:45:00+09:00'),
-    gateOrigin: 'A21',
+    // gateOrigin omis : varie quotidiennement (Z23, Z57, Z58…)
     terminalOrigin: '1',
+    gateDestination: '107',
     terminalDestination: '3',
   },
   {
     ident: 'AF7431',
     group: 'af',
     airline: 'Air France',
+    aircraft: 'Airbus A220-300',
     from: { code: 'BOD', city: 'Bordeaux' },
     to: { code: 'CDG', city: 'Paris CDG' },
     scheduledDeparture: new Date('2026-05-19T09:55:00+02:00'),
     scheduledArrival: new Date('2026-05-19T11:20:00+02:00'),
     gateOrigin: '22',
     terminalOrigin: 'B',
+    // gateDestination omis : attribué le jour même à CDG 2F
     terminalDestination: '2F',
   },
   {
     ident: 'AF286',
     group: 'af',
     airline: 'Air France',
+    aircraft: 'Airbus A350-900',
     from: { code: 'CDG', city: 'Paris CDG' },
     to: { code: 'HND', city: 'Tokyo' },
     scheduledDeparture: new Date('2026-05-19T12:40:00+02:00'),
     scheduledArrival: new Date('2026-05-20T08:55:00+09:00'),
+    // gateOrigin omis : attribué le jour même à CDG 2E
     terminalOrigin: '2E',
     terminalDestination: '3',
   },
