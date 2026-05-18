@@ -213,16 +213,26 @@ export async function loader({ params }: Route.LoaderArgs) {
     if (!res.ok) {
       // Don't fail the page when AeroAPI hiccups — degrade to scheduled times.
       const text = await res.text().catch(() => '');
+      const isQuota = res.status === 429 || /quota|rate.?limit/i.test(text);
+      const body = {
+        flight: buildStaticStatus(staticLeg),
+        count: 0,
+        source: 'static' as const,
+        reason: isQuota ? 'aeroapi-quota' : `aeroapi-${res.status}`,
+      };
+      // On quota: store the fallback with extended TTL so we stop hammering
+      // AeroAPI for the next hour (the in-memory cache short-circuits the
+      // upstream call entirely).
+      if (isQuota) {
+        responseCache.set(cacheKey, { body, expiresAt: Date.now() + 60 * 60 * 1000 });
+      }
       return Response.json(
+        { ...body, detail: text.slice(0, 200) },
         {
-          flight: buildStaticStatus(staticLeg),
-          count: 0,
-          source: 'static',
-          reason: `aeroapi-${res.status}`,
-          detail: text.slice(0, 200),
-          debug: { url, start, end, nowIso: new Date(now).toISOString() },
+          headers: {
+            'Cache-Control': isQuota ? 'public, max-age=3600, s-maxage=3600' : 'public, max-age=60, s-maxage=60',
+          },
         },
-        { headers: { 'Cache-Control': 'no-store' } },
       );
     }
 
