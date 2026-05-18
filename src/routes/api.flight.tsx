@@ -6,9 +6,12 @@ const AEROAPI_BASE = 'https://aeroapi.flightaware.com/aeroapi';
 
 const TRIP_WINDOW_START = new Date('2026-05-18T22:00:00Z').getTime();
 const TRIP_WINDOW_END = new Date('2026-05-21T00:00:00Z').getTime();
-const TARGET_DEPARTURE = new Date('2026-05-19T08:30:00Z').getTime();
+const TARGET_DEPARTURE = new Date('2026-05-19T08:35:00Z').getTime();
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+// AeroAPI rejects `end > now + 2 days` strictly (potentially with clock skew
+// between our server and theirs). Stay 10 min under to avoid 400 at the limit.
+const AEROAPI_FUTURE_MARGIN_MS = 10 * 60 * 1000;
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
 type CachedResponse = { body: Record<string, unknown>; expiresAt: number };
@@ -174,22 +177,29 @@ export async function loader({ params }: Route.LoaderArgs) {
   }
 
   const now = Date.now();
-  const maxFuture = now + 2 * DAY_MS;
+  const maxFuture = now + 2 * DAY_MS - AEROAPI_FUTURE_MARGIN_MS;
   const minPast = now - 10 * DAY_MS;
 
-  if (TRIP_WINDOW_START > maxFuture) {
+  const startMs = Math.max(TRIP_WINDOW_START, minPast);
+  const endMs = Math.min(TRIP_WINDOW_END, maxFuture);
+
+  // Fallback to static whenever AeroAPI can't be queried with a sane window:
+  // trip too far in the future, or trip ended long enough ago that the
+  // computed range collapses / inverts.
+  if (TRIP_WINDOW_START > maxFuture || endMs <= startMs || endMs <= now) {
+    let reason = 'out-of-window';
+    if (TRIP_WINDOW_START > maxFuture) reason = 'trip-too-far';
+    else if (endMs <= now) reason = 'trip-passed';
     const body = {
-      flight: staticLeg ? buildStaticStatus(staticLeg) : null,
+      flight: buildStaticStatus(staticLeg),
       count: 0,
       source: 'static' as const,
-      reason: 'trip-too-far',
+      reason,
     };
     writeCache(cacheKey, body);
     return cachedJson(body, 0);
   }
 
-  const startMs = Math.max(TRIP_WINDOW_START, minPast);
-  const endMs = Math.min(TRIP_WINDOW_END, maxFuture);
   const start = new Date(startMs).toISOString();
   const end = new Date(endMs).toISOString();
 
@@ -201,10 +211,17 @@ export async function loader({ params }: Route.LoaderArgs) {
     });
 
     if (!res.ok) {
+      // Don't fail the page when AeroAPI hiccups — degrade to scheduled times.
       const text = await res.text().catch(() => '');
       return Response.json(
-        { error: `AeroAPI ${res.status}`, detail: text.slice(0, 200), flight: null },
-        { status: 502, headers: { 'Cache-Control': 'no-store' } },
+        {
+          flight: buildStaticStatus(staticLeg),
+          count: 0,
+          source: 'static',
+          reason: `aeroapi-${res.status}`,
+          detail: text.slice(0, 200),
+        },
+        { headers: { 'Cache-Control': 'public, max-age=60, s-maxage=60' } },
       );
     }
 
@@ -240,8 +257,14 @@ export async function loader({ params }: Route.LoaderArgs) {
     return cachedJson(body, 0);
   } catch (err) {
     return Response.json(
-      { error: 'Network error', detail: (err as Error).message, flight: null },
-      { status: 502, headers: { 'Cache-Control': 'no-store' } },
+      {
+        flight: buildStaticStatus(staticLeg),
+        count: 0,
+        source: 'static',
+        reason: 'network-error',
+        detail: (err as Error).message,
+      },
+      { headers: { 'Cache-Control': 'public, max-age=60, s-maxage=60' } },
     );
   }
 }
