@@ -220,8 +220,9 @@ export async function loader({ params }: Route.LoaderArgs) {
           source: 'static',
           reason: `aeroapi-${res.status}`,
           detail: text.slice(0, 200),
+          debug: { url, start, end, nowIso: new Date(now).toISOString() },
         },
-        { headers: { 'Cache-Control': 'public, max-age=60, s-maxage=60' } },
+        { headers: { 'Cache-Control': 'no-store' } },
       );
     }
 
