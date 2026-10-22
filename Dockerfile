@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ── Base ─────────────────────────────────────────────────────────────
-FROM node:24-alpine AS base
+FROM node:26-alpine AS base
 RUN corepack enable && corepack prepare pnpm@10.20.0 --activate
 WORKDIR /app
 
@@ -21,7 +21,7 @@ COPY pnpm-lock.yaml package.json pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 
 # ── Runtime ──────────────────────────────────────────────────────────
-FROM node:24-alpine AS runtime
+FROM node:26-alpine AS runtime
 WORKDIR /app
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/build ./build
