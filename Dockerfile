@@ -2,7 +2,7 @@
 
 # ── Base ─────────────────────────────────────────────────────────────
 FROM node:26-alpine AS base
-RUN corepack enable && corepack prepare pnpm@10.20.0 --activate
+RUN npm install -g corepack@latest && corepack enable && corepack prepare pnpm@10.20.0 --activate
 WORKDIR /app
 
 # ── Install all dependencies ─────────────────────────────────────────
