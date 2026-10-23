@@ -2,3 +2,5 @@ onlyBuiltDependencies:
   - '@heroui/shared-utils'
   - esbuild
   - sharp
+overrides:
+  tinypool@^2: '>=2.1.2 <3.0.0'
