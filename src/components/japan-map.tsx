@@ -1,10 +1,14 @@
 import * as React from 'react';
 import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre';
 import type { MapRef } from 'react-map-gl/maplibre';
+import { setWorkerUrl } from 'maplibre-gl';
 import type { Map as MaplibreMap } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 
 import type { DayPlan } from '~/data/trip';
+
+setWorkerUrl(workerUrl);
 
 // ~30 points d'intérêt emblématiques du Japon
 const POIS = [
