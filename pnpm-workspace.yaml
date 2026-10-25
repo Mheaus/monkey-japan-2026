@@ -1,6 +1,7 @@
-onlyBuiltDependencies:
-  - '@heroui/shared-utils'
-  - esbuild
-  - sharp
+allowBuilds:
+  '@heroui/shared-utils': true
+  esbuild: true
+  sharp: true
+
 overrides:
   tinypool@^2: '>=2.1.2 <3.0.0'

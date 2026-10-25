@@ -2,7 +2,8 @@
 
 # ── Base ─────────────────────────────────────────────────────────────
 FROM node:26-alpine AS base
-RUN npm install -g corepack@latest && corepack enable && corepack prepare pnpm@10.20.0 --activate
+COPY --from=ghcr.io/pnpm/pnpm:12.15.0-alpine@sha256:f164ca19f7736a0994dae195b81756cd969542a93ef692f5ab466759d06c1da9 /opt/pnpm /opt/pnpm
+RUN ln -s /opt/pnpm/pnpm /usr/local/bin/pnpm
 WORKDIR /app
 
 # ── Install all dependencies ─────────────────────────────────────────
@@ -22,6 +23,9 @@ RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 
 # ── Runtime ──────────────────────────────────────────────────────────
 FROM node:26-alpine AS runtime
+RUN apk upgrade --no-cache \
+  && rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack \
+  && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack
 WORKDIR /app
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/build ./build
